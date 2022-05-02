@@ -1,0 +1,10 @@
+.elements__icon {
+  max-width: 22px;
+  cursor: pointer;
+}
+
+.elements__icon:hover {
+  opacity: 0.8;
+  transition: 0.4s opacity;
+
+}
