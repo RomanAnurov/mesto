@@ -3,18 +3,19 @@
   border: 2px solid #fff;
   width: 22px;
   cursor: pointer;
-      
+
 }
 
 .profile__add-button:hover {
   opacity: 0.6;
   transition: 0.4s opacity;
 }
+
 @media screen and (max-width:795px) {
   .profile__add-button {
     margin-top: 36px;
     width: 16px;
     padding: 15px 131px;
   }
-  
+
 }

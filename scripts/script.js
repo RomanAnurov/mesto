@@ -51,6 +51,7 @@ function formSubmitHandler(evt) {
 
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
+
 formElement.addEventListener('submit', formSubmitHandler); 
 const closeSaveButton = formElement.querySelector('.popup__save');
 closeSaveButton.addEventListener('click', popupOpenToggle);
