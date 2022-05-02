@@ -6,25 +6,16 @@ function popupOpenToggle() {
   popup.classList.toggle('popup_opened');
 }
 
-function popupOverLayClickHandler(evt) {
 
-  if (evt.target === evt.currentTarget) {
-    popupOpenToggle();
-
-  }
-
-}
 openPopupButton.addEventListener('click', popupOpenToggle);
 
 closePopupButton.addEventListener('click', popupOpenToggle);
-
-popup.addEventListener('click', popupOverLayClickHandler);
 
 
 //редактирование формы//
 
 // Находим форму в DOM
-let formElement = document.querySelector('.popup__form');// Воспользуйтесь методом querySelector()
+const formElement = document.querySelector('.popup__form');// Воспользуйтесь методом querySelector()
 // Находим поля формы в DOM
 const nameInput = formElement.querySelector('.popup__input_type_user-name');// Воспользуйтесь инструментом .querySelector()
 const jobInput = formElement.querySelector('.popup__input_type_user-about');// Воспользуйтесь инструментом .querySelector()
@@ -34,10 +25,12 @@ const profileSubtitle = document.querySelector('.profile__sub-title');
 
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
+
 function formSubmitHandler(evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
   // Так мы можем определить свою логику отправки.
   // О том, как это делать, расскажем позже.
+  
 
   // Получите значение полей jobInput и nameInput из свойства value
     
@@ -46,13 +39,16 @@ function formSubmitHandler(evt) {
   // Вставьте новые значения с помощью textContent
   profileTitle.textContent = `${nameInput.value}`;
   profileSubtitle.textContent = `${jobInput.value}`;
-
+  
+   return popupOpenToggle()
 }
 
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
+formElement.addEventListener('submit', formSubmitHandler);
 
-formElement.addEventListener('submit', formSubmitHandler); 
-const closeSaveButton = formElement.querySelector('.popup__save');
-closeSaveButton.addEventListener('click', popupOpenToggle);
+
+ 
+
+
 

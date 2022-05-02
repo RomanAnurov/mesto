@@ -19,12 +19,13 @@
       <div class="profile__info">
         <div class="profile__row">
           <h1 class="profile__title">Жак-Ив Кусто</h1>
-          <img class="profile__edit-button" src="./images/edit-button.svg" alt="символ редактировать">
+          <button class="profile__edit-button" type="button"><img src="./images/edit-button.svg"
+              alt="символ редактировать"></button>
         </div>
         <p class="profile__sub-title">Исследователь океана</p>
       </div>
 
-      <img class="profile__add-button" src="./images/add-button.svg" alt="символ плюс">
+      <button class="profile__add-button" type="button"><img src="./images/add-button.svg" alt="символ плюс"></button>
     </section>
 
     <section class="elements">
@@ -32,42 +33,42 @@
         <img class="elements__foto" src="./images/karachaevsk.jpg" alt="карачаевск">
         <div class="elements__info">
           <h2 class="elements__caption">Карачаевск</h2>
-          <img class="elements__icon" src="./images/like.svg" alt="иконка серденчко">
+          <button class="elements__icon" type="button"><img src="./images/like.svg" alt="иконка серденчко"></button>
         </div>
       </div>
       <div class="elements__item">
         <img class="elements__foto" src="./images/gora-elbrus.jpg" alt="карачаевск">
         <div class="elements__info">
           <h2 class="elements__caption">Гора Эльбрус</h2>
-          <img class="elements__icon" src="./images/like.svg" alt="иконка серденчко">
+          <button class="elements__icon" type="button"><img src="./images/like.svg" alt="иконка серденчко"></button>
         </div>
       </div>
       <div class="elements__item">
         <img class="elements__foto" src="./images/dombay.jpg" alt="карачаевск">
         <div class="elements__info">
           <h2 class="elements__caption">Домбай</h2>
-          <img class="elements__icon" src="./images/like.svg" alt="иконка серденчко">
+          <button class="elements__icon" type="button"><img src="./images/like.svg" alt="иконка серденчко"></button>
         </div>
       </div>
       <div class="elements__item">
         <img class="elements__foto" src="./images/gora-elbrus.jpg" alt="карачаевск">
         <div class="elements__info">
           <h2 class="elements__caption">Гора Эльбрус</h2>
-          <img class="elements__icon" src="./images/like.svg" alt="иконка серденчко">
+          <button class="elements__icon" type="button"><img src="./images/like.svg" alt="иконка серденчко"></button>
         </div>
       </div>
       <div class="elements__item">
         <img class="elements__foto" src="./images/dombay.jpg" alt="карачаевск">
         <div class="elements__info">
           <h2 class="elements__caption">Домбай</h2>
-          <img class="elements__icon" src="./images/like.svg" alt="иконка серденчко">
+          <button class="elements__icon" type="button"><img src="./images/like.svg" alt="иконка серденчко"></button>
         </div>
       </div>
       <div class="elements__item">
         <img class="elements__foto" src="./images/karachaevsk.jpg" alt="карачаевск">
         <div class="elements__info">
           <h2 class="elements__caption">Карачаево-Черкессия</h2>
-          <img class="elements__icon" src="./images/like.svg" alt="иконка серденчко">
+          <button class="elements__icon" type="button"><img src="./images/like.svg" alt="иконка серденчко"></button>
         </div>
       </div>
     </section>
@@ -81,16 +82,16 @@
     <div class="popup__container">
       <button class="popup__close" type="button"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
-      <form class="popup__form">
+      <form class="popup__form" name="editProfile">
         <input class="popup__input popup__input_type_user-name" type="text" name="user-name" required
-          placeholder="Ваше имя">
+          value="Жак-Ив Кусто">
         <input class="popup__input popup__input_type_user-about" type="text" name="user-about" required
-          placeholder="Коротко о себе">
+          value="Исследователь океана">
         <button class="popup__save" type="submit">Сохранить</button>
       </form>
     </div>
   </div>
-  <script src="./scripts/script.js"></script>
+  <script src="./scripts/index.js"></script>
 </body>
 
 </html>

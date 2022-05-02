@@ -1,7 +1,11 @@
 .profile__add-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: none;
   padding: 12px 62px;
   border: 2px solid #fff;
-  width: 22px;
+  
   cursor: pointer;
 
 }

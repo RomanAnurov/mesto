@@ -1,4 +1,9 @@
 .elements__icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  border: none;
   max-width: 22px;
   cursor: pointer;
 }
