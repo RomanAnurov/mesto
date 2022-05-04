@@ -1,10 +1,10 @@
 .elements__icon {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: none;
+  background: url(../../../images/like.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 19px;
+  width: 22px;
   border: none;
-  max-width: 22px;
   cursor: pointer;
 }
 

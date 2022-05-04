@@ -1,14 +1,11 @@
 .profile__edit-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: none;
-  max-width: 24px;
-  max-height: 24px;
+  background: url(../../../images/edit-button.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 24px;
+  height: 24px;
   border: 1px solid #fff;
-  padding: 6px;
   cursor: pointer;
-  box-sizing: border-box;
   margin-top: 15px;
 
 }
@@ -32,7 +29,6 @@
     max-width: 18px;
     max-height: 18px;
     border: 1px solid #fff;
-    padding: 4px;
     margin-top: 8px;
   }
 
