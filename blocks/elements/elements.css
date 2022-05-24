@@ -4,18 +4,24 @@
   grid-template-rows: 1fr 1fr;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px 17px;
+  grid-auto-rows: 1fr;
+  
+  
 
 }
 
-@media screen and (max-width:625px) {
+@media screen and (max-width:768px) {
   .elements {
+    grid-template-rows: repeat(3, 1fr);
     grid-template-columns: repeat(2, 1fr);
+    
   }
 
 }
 
 @media screen and (max-width:425px) {
   .elements {
+    grid-template-rows: repeat(6, 1fr);
     grid-template-columns: 1fr;
   }
 

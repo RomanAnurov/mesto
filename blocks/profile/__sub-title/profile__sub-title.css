@@ -7,23 +7,18 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-
 }
 
-@media screen and (max-width:795px) {
+@media screen and (max-width: 795px) {
   .profile__sub-title {
     text-align: center;
-
   }
-
 }
 
-@media screen and (max-width:425px) {
+@media screen and (max-width: 425px) {
   .profile__sub-title {
     max-width: 189px;
     font-size: 14px;
     margin-top: 10px;
-
   }
-
 }

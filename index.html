@@ -27,56 +27,16 @@
     </section>
 
     <section class="elements">
-      <div class="elements__item">
-        <img class="elements__foto" src="./images/karachaevsk.jpg" alt="карачаевск">
-        <div class="elements__info">
-          <h2 class="elements__caption">Карачаевск</h2>
-          <button class="elements__icon" type="button"></button>
-        </div>
-      </div>
-      <div class="elements__item">
-        <img class="elements__foto" src="./images/gora-elbrus.jpg" alt="карачаевск">
-        <div class="elements__info">
-          <h2 class="elements__caption">Гора Эльбрус</h2>
-          <button class="elements__icon" type="button"></button>
-        </div>
-      </div>
-      <div class="elements__item">
-        <img class="elements__foto" src="./images/dombay.jpg" alt="карачаевск">
-        <div class="elements__info">
-          <h2 class="elements__caption">Домбай</h2>
-          <button class="elements__icon" type="button"></button>
-        </div>
-      </div>
-      <div class="elements__item">
-        <img class="elements__foto" src="./images/gora-elbrus.jpg" alt="карачаевск">
-        <div class="elements__info">
-          <h2 class="elements__caption">Гора Эльбрус</h2>
-          <button class="elements__icon" type="button"></button>
-        </div>
-      </div>
-      <div class="elements__item">
-        <img class="elements__foto" src="./images/dombay.jpg" alt="карачаевск">
-        <div class="elements__info">
-          <h2 class="elements__caption">Домбай</h2>
-          <button class="elements__icon" type="button"></button>
-        </div>
-      </div>
-      <div class="elements__item">
-        <img class="elements__foto" src="./images/karachaevsk.jpg" alt="карачаевск">
-        <div class="elements__info">
-          <h2 class="elements__caption">Карачаево-Черкессия</h2>
-          <button class="elements__icon" type="button"></button>
-        </div>
-      </div>
+
     </section>
   </main>
   <footer class="footer">
     <p class="footer__copyright">© 2020 Mesto Russia</p>
   </footer>
 
-  <!--Форма редактировать профиль-->
-  <div class="popup">
+  <!--Попап редактировать профиль-->
+
+  <div class="popup popup_type_edit-profile">
     <div class="popup__container">
       <button class="popup__close" type="button"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
@@ -89,6 +49,35 @@
       </form>
     </div>
   </div>
+  
+  <!--Попап добавления новой карточки-->
+
+  <div class="popup popup_type_add-card">
+    <div class="popup__container">
+      <button class="popup__close" type="button"></button>
+      <h2 class="popup__title">Новое место</h2>
+      <form class="popup__form" name="addCard">
+        <input class="popup__input popup__input_type_card-name" type="text" name="card-name" required
+          value="Название">
+        <input class="popup__input popup__input_type_card-url" type="url" name="card-url" required
+          value="Ссылка на картинку">
+        <button class="popup__save" type="submit">Создать</button>
+      </form>
+    </div>
+  </div>
+
+
+  <!--Темплэйт тэг-->
+
+  <template id="elements-template">
+    <div class="elements__item">
+      <img class="elements__foto">
+      <div class="elements__info">
+        <h2 class="elements__caption"></h2>
+        <button class="elements__icon" type="button"></button>
+      </div>
+    </div>
+  </template>
   <script src="./scripts/index.js"></script>
 </body>
 
