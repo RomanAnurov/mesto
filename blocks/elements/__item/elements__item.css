@@ -2,7 +2,6 @@
   border-radius: 10px;
   background: #fff;
   overflow: hidden;
-  max-height: 361px;
-  
-        
+  height: 361px;
+  position: relative;
 }
