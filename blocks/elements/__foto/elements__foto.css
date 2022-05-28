@@ -3,4 +3,10 @@
   max-height: 282px;
   height: 100%;
   object-fit: cover;
+  cursor: pointer;
+}
+
+.elements__foto:hover {
+  opacity: 0.8;
+  transition: 0.3s opacity;
 }

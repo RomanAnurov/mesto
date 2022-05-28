@@ -7,7 +7,6 @@
   border: 1px solid #fff;
   cursor: pointer;
   margin-top: 15px;
-
 }
 
 .profile__edit-button:hover {
@@ -15,21 +14,17 @@
   transition: 0.4s opacity;
 }
 
-@media screen and (max-width:795px) {
+@media screen and (max-width: 795px) {
   .profile__edit-button {
-
     margin-right: 0;
-
   }
-
 }
 
-@media screen and (max-width:425px) {
+@media screen and (max-width: 425px) {
   .profile__edit-button {
     max-width: 18px;
     max-height: 18px;
     border: 1px solid #fff;
     margin-top: 8px;
   }
-
 }
