@@ -1,14 +1,14 @@
-const openPopupButton = document.querySelector(".profile__edit-button");
+const openPopupEditButton = document.querySelector(".profile__edit-button");
 const popupEdit = document.querySelector(".popup_type_edit-profile");
-const closePopupButton = popupEdit.querySelector(".popup__close");
+const closePopupEditButton = popupEdit.querySelector(".popup__close");
 
 function popupOpenToggle() {
   popupEdit.classList.toggle("popup_type_opened");
 }
 
-openPopupButton.addEventListener("click", popupOpenToggle);
+openPopupEditButton.addEventListener("click", popupOpenToggle);
 
-closePopupButton.addEventListener("click", popupOpenToggle);
+closePopupEditButton.addEventListener("click", popupOpenToggle);
 
 //редактирование формы//
 
@@ -34,8 +34,8 @@ function formSubmitHandler(evt) {
   // Выберите элементы, куда должны быть вставлены значения полей
 
   // Вставьте новые значения с помощью textContent
-  profileTitle.textContent = `${nameInput.value}`;
-  profileSubtitle.textContent = `${jobInput.value}`;
+  profileTitle.textContent = nameInput.value;
+  profileSubtitle.textContent = jobInput.value;
 
   return popupOpenToggle();
 }
@@ -130,7 +130,7 @@ function handleOpenPopupImage(elementsData) {
   captionImagePopup.textContent = elementsData.name;
   popupImage.src = elementsData.link;
 
-  popupImageOpenWindow.classList.toggle("popup_type_opened");
+  openPopupImageWindow.classList.toggle("popup_type_opened");
 
 }
 
@@ -177,11 +177,11 @@ initialCards.forEach((elementsData) => {
 // селект попапа с модальным окном картинки
 
 
-const popupImageOpenWindow = document.querySelector(".popup_type_image-open");
-const closePopupImageWindow = popupImageOpenWindow.querySelector(".popup__close");
+const openPopupImageWindow = document.querySelector(".popup_type_image-open");
+const closePopupImageWindow = openPopupImageWindow.querySelector(".popup__close");
 
 function popupImageOpenToggle() {
-  popupImageOpenWindow.classList.toggle("popup_type_opened");
+  openPopupImageWindow.classList.toggle("popup_type_opened");
 }
 
 
