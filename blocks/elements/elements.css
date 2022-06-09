@@ -1,4 +1,5 @@
 .elements {
+  min-height: 33vh;
   display: grid;
   justify-content: center;
   grid-template-rows: 1fr 1fr;

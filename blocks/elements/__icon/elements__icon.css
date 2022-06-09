@@ -3,7 +3,7 @@
   background-repeat: no-repeat;
   background-position: center;
   height: 19px;
-  width: 22px;
+  min-width: 22px;
   border: none;
   cursor: pointer;
 }
