@@ -38,24 +38,12 @@ const buttonCloseWindow = popupImageWindow.querySelector(".popup__close");
 
 //функции
 
-function openPopup(popupEdit) {
-  popupEdit.classList.add("popup_type_opened");
+function openPopup(popup) {
+  popup.classList.add("popup_type_opened");
 }
 
-function closePopup(popupEdit) {
-  popupEdit.classList.remove("popup_type_opened");
-}
-
-function openPopup(popupAdd) {
-  popupAdd.classList.add("popup_type_opened");
-}
-
-function closePopup(popupAdd) {
-  popupAdd.classList.remove("popup_type_opened");
-}
-
-function closePopup(popupImageWindow) {
-  popupImageWindow.classList.remove("popup_type_opened");
+function closePopup(popup) {
+  popup.classList.remove("popup_type_opened");
 }
 
 // Обработчик «отправки» формы, хотя пока
@@ -102,7 +90,8 @@ const handlerSubmitAddElementsForm = (evt) => {
     name: nameCardInput.value,
     link: urlCardInput.value,
   });
-
+  nameCardInput.value = "";
+  urlCardInput.value = "";
   return closePopup(popupAdd);
 };
 // удаление карточки
@@ -125,7 +114,7 @@ function handlerOpenPopupImage(elementsData) {
   popupImage.src = elementsData.link;
   popupImage.alt = elementsData.name;
 
-  popupImageWindow.classList.add("popup_type_opened");
+  return openPopup(popupImageWindow);
 }
 
 // генерация карточки
