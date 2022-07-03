@@ -32,33 +32,37 @@
     <p class="footer__copyright">© 2020 Mesto Russia</p>
   </footer>
 
-  <!--Попап редактировать профиль-->
+  <!--Попап и форма редактировать профиль-->
 
   <div class="popup popup_type_edit-profile">
     <div class="popup__container">
       <button class="popup__close" type="button"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
-      <form class="popup__form" name="editProfile">
-        <input class="popup__input popup__input_type_user-name" type="text" name="user-name" required
-          value="Жак-Ив Кусто" />
-        <input class="popup__input popup__input_type_user-about" type="text" name="user-about" required
-          value="Исследователь океана" />
+      <form class="popup__form" name="editProfile" novalidate>
+        <input id="user-name" class="popup__input popup__input_type_user-name" type="text" name="user-name"
+          minlength="2" maxlength="40" value="Жак-Ив Кусто" required>
+        <span class="user-name-error popup__input-error"></span>
+        <input id="user-about" class="popup__input popup__input_type_user-about" type="text" name="user-about"
+          value="Исследователь океана" minlength="2" maxlength="200" required>
+        <span class="user-about-error popup__input-error">Необходимо заполнить данное поле</span>
         <button class="popup__save" type="submit">Сохранить</button>
       </form>
     </div>
   </div>
 
-  <!--Попап добавления новой карточки-->
+  <!--Попап и форма добавления новой карточки-->
 
   <div class="popup popup_type_add-card">
     <div class="popup__container">
       <button class="popup__close" type="button"></button>
       <h2 class="popup__title">Новое место</h2>
-      <form class="popup__form" name="addCard">
-        <input class="popup__input popup__input_type_card-name" type="text" name="card-name" required
-          placeholder="Название">
-        <input class="popup__input popup__input_type_card-url" type="url" name="card-url" required
-          placeholder="Ссылка на картинку">
+      <form class="popup__form" name="addCard" novalidate>
+        <input id= "card-name" class="popup__input popup__input_type_card-name" type="text" name="card-name" placeholder="Название"
+          minlength="2" maxlength="30" required>
+          <span class="card-name-error popup__input-error"></span>
+        <input id="card-url" class="popup__input popup__input_type_card-url" type="url" name="card-url"
+          placeholder="Ссылка на картинку" required>
+          <span class="card-url-error popup__input-error"></span>
         <button class="popup__save" type="submit">Создать</button>
       </form>
     </div>
