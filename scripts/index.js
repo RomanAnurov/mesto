@@ -1,7 +1,8 @@
 const buttonPopupOpenEdit = document.querySelector(".profile__edit-button");
 const popupEdit = document.querySelector(".popup_type_edit-profile");
 const buttonPopupClose = popupEdit.querySelector(".popup__close");
-const popup = document.querySelectorAll(".popup");
+const popups = document.querySelectorAll(".popup");
+
 
 //редактирование формы//
 
@@ -38,21 +39,26 @@ const popupImage = document.querySelector(".popup__image");
 const popupImageWindow = document.querySelector(".popup_type_image-open");
 const buttonCloseWindow = popupImageWindow.querySelector(".popup__close");
 
-//функции
+
+
+//функция открытия попапов
 
 function openPopup(popup) {
+
   popup.classList.add("popup_type_opened");
 
 
 }
+// Функция закрытия попапов
 
 function closePopup(popup) {
   popup.classList.remove("popup_type_opened");
+
 }
 
 // Закрытие Попапа нажатием на  Esc
 
-popup.forEach((popup) => {
+popups.forEach((popup) => {
   window.addEventListener('keydown', function (evt) {
     if (evt.code === 'Escape') {
       closePopup(popup);
@@ -63,7 +69,7 @@ popup.forEach((popup) => {
 
 //Закрытие попапа кликом на оверлей
 
-popup.forEach((popup) => {
+popups.forEach((popup) => {
   popup.addEventListener('click', function (evt) {
     if (evt.target === evt.currentTarget) {
       closePopup(popup);
@@ -71,6 +77,14 @@ popup.forEach((popup) => {
   });
 });
 
+//Функция блокировки кнопки по умолчанию
+
+function blockButtonDefoult() {
+  const buttonElement = formAddCard.querySelector('.popup__save');
+  buttonElement.classList.add('popup__save_inactive');
+  buttonElement.setAttribute('disabled', 'disabled');
+
+}
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
 
@@ -114,15 +128,15 @@ const handlerSubmitAddElementsForm = (evt) => {
   renderElementsList({
     name: nameCardInput.value,
     link: urlCardInput.value,
+
   });
-
-  formAddCard.reset();
   closePopup(popupAdd);
-
-
+  formAddCard.reset();
+  blockButtonDefoult();
 
 
 };
+
 // удаление карточки
 
 const handleDeleteElementsCard = (evt) => {
