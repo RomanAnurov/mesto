@@ -1,17 +1,17 @@
 const buttonPopupOpenEdit = document.querySelector(".profile__edit-button");
 const popupEdit = document.querySelector(".popup_type_edit-profile");
-const buttonPopupClose = popupEdit.querySelector(".popup__close");
+const buttonPopupEditClose = popupEdit.querySelector(".popup__close");
 const popups = document.querySelectorAll(".popup");
 
 //редактирование формы//
 
 // Находим форму редактирования данных пользователяв DOM
 
-const formElement = popupEdit.querySelector(".popup__form"); // Воспользуйтесь методом querySelector()
+const formElementEdit = popupEdit.querySelector(".popup__form"); // Воспользуйтесь методом querySelector()
 // Находим поля формы в DOM
-const nameInput = formElement.querySelector(".popup__input_type_user-name"); // Воспользуйтесь инструментом .querySelector()
-const jobInput = formElement.querySelector(".popup__input_type_user-about"); // Воспользуйтесь инструментом .querySelector()
-const formInput = formElement.querySelector(".popup__input");
+const nameInput = formElementEdit.querySelector(".popup__input_type_user-name"); // Воспользуйтесь инструментом .querySelector()
+const jobInput = formElementEdit.querySelector(".popup__input_type_user-about"); // Воспользуйтесь инструментом .querySelector()
+
 
 const profileTitle = document.querySelector(".profile__title");
 const profileSubtitle = document.querySelector(".profile__sub-title");
@@ -35,19 +35,19 @@ const popupImage = document.querySelector(".popup__image");
 // селект попапа с модальным окном картинки
 
 const popupImageWindow = document.querySelector(".popup_type_image-open");
-const buttonCloseWindow = popupImageWindow.querySelector(".popup__close");
+const buttonPopupImageClose = popupImageWindow.querySelector(".popup__close");
 
 //функция открытия попапов
 
 function openPopup(popup) {
   popup.classList.add("popup_type_opened");
-  window.addEventListener("keydown", popupCloseEsc);
+  document.addEventListener("keydown", popupCloseEsc);
 }
 // Функция закрытия попапов
 
 function closePopup(popup) {
   popup.classList.remove("popup_type_opened");
-  window.removeEventListener("keydown", popupCloseEsc);
+  document.removeEventListener("keydown", popupCloseEsc);
 }
 
 // Закрытие Попапа нажатием на  Esc
@@ -72,9 +72,9 @@ popups.forEach((popup) => {
 //Функция блокировки кнопки по умолчанию
 
 function blockButtonDefoult() {
-  const buttonElement = formAddCard.querySelector(".popup__save");
-  buttonElement.classList.add("popup__save_inactive");
-  buttonElement.setAttribute("disabled", "disabled");
+  const buttonSaveAddCard = formAddCard.querySelector(".popup__save");
+  buttonSaveAddCard.classList.add("popup__save_inactive");
+  buttonSaveAddCard.setAttribute("disabled", "disabled");
 }
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
@@ -97,12 +97,12 @@ function handlerSubmitForm(evt) {
 
 buttonPopupOpenEdit.addEventListener("click", () => openPopup(popupEdit));
 
-buttonPopupClose.addEventListener("click", () => closePopup(popupEdit));
+buttonPopupEditClose.addEventListener("click", () => closePopup(popupEdit));
 
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
 
-formElement.addEventListener("submit", handlerSubmitForm);
+formElementEdit.addEventListener("submit", handlerSubmitForm);
 
 buttonOpenPopupAdd.addEventListener("click", () => openPopup(popupAdd));
 buttonClosePopupAdd.addEventListener("click", () => closePopup(popupAdd));
@@ -176,7 +176,7 @@ function generateElementsCard(elementsData) {
 
 //слушатели
 
-buttonCloseWindow.addEventListener("click", () => closePopup(popupImageWindow));
+buttonPopupImageClose.addEventListener("click", () => closePopup(popupImageWindow));
 formAddCard.addEventListener("submit", handlerSubmitAddElementsForm);
 
 //рендер карточки
