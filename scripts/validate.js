@@ -85,14 +85,14 @@ const setEventListeners = (formElement) => {
 
 //Добавляем всем формам обработчики
 
-const enableValidation = () => {
+const enableValidation = (config) => {
   // Найдём все формы с указанным классом в DOM,
   // сделаем из них массив методом Array.from
   const formList = Array.from(document.querySelectorAll(config.formSelector));
 
   // Переберём полученную коллекцию
   formList.forEach((formElement) => {
-  
+
     setEventListeners(formElement, config);
   });
 };

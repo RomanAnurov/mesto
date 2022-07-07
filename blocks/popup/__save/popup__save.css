@@ -10,13 +10,11 @@
   color: white;
   cursor: pointer;
   margin: 48px 0 0;
-  
 }
 
 .popup__save:hover {
   background: rgba(0, 0, 0, 0.8);
   transition: 0.4s opacity;
-  
 }
 
 @media screen and (max-width: 445px) {
