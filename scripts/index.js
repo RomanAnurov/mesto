@@ -1,3 +1,5 @@
+// константы
+
 const buttonPopupOpenEdit = document.querySelector(".profile__edit-button");
 const popupEdit = document.querySelector(".popup_type_edit-profile");
 const buttonPopupEditClose = popupEdit.querySelector(".popup__close");
@@ -102,7 +104,7 @@ buttonPopupEditClose.addEventListener("click", () => closePopup(popupEdit));
 // Вызовем функцию проверки валидации
 
 enableValidation({
-    formSelector: ".popup__form",
+  formSelector: ".popup__form",
   inputSelector: ".popup__input",
   submitButtonSelector: ".popup__save", //кнопка сохранить внутри попапа
   inactiveButtonClass: "popup__save_inactive", //деактивация кнопки сохранить внутри попапа
@@ -199,3 +201,6 @@ const renderElementsList = (elementsData) => {
 initialCards.forEach((elementsData) => {
   renderElementsList(elementsData);
 });
+
+
+
