@@ -88,7 +88,7 @@ const setEventListeners = (formElement) => {
 const enableValidation = (paramConfig) => {
   // Найдём все формы с указанным классом в DOM,
   // сделаем из них массив методом Array.from
-  const formList = Array.from(document.querySelectorAll(config.formSelector));
+  const formList = Array.from(document.querySelectorAll(paramConfig.formSelector));
 
   // Переберём полученную коллекцию
   formList.forEach((formElement) => {

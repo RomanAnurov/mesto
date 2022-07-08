@@ -17,7 +17,7 @@
   transition: 0.4s opacity;
 }
 
-@media screen and (max-width: 445px) {
+@media screen and (max-width: 530px) {
   .popup__save {
     width: 238px;
     height: 46px;
