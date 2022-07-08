@@ -90,12 +90,3 @@ const enableValidation = (config) => {
   });
 };
 
-// Вызовем функцию
-enableValidation({
-  formSelector: ".popup__form",
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__save", //кнопка сохранить внутри попапа
-  inactiveButtonClass: "popup__save_inactive", //деактивация кнопки сохранить внутри попапа
-  inputErrorClass: "popup__input_type_error", // инпут с  ошибкой
-  errorClass: "popup__input-error_active", // браузерный текст ошибки
-});
