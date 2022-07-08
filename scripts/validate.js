@@ -1,11 +1,4 @@
-const config = {
-  formSelector: ".popup__form",
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__save", //кнопка сохранить внутри попапа
-  inactiveButtonClass: "popup__save_inactive", //деактивация кнопки сохранить внутри попапа
-  inputErrorClass: "popup__input_type_error", // инпут с  ошибкой
-  errorClass: "popup__input-error_active", // браузерный текст ошибки
-};
+
 
 // Функция, которая добавляет класс с ошибкой
 
@@ -62,7 +55,7 @@ const toggleButtoneState = (inputList, buttonElement, config) => {
 
 //Функция доюбавляет всем полям формы обработчики
 
-const setEventListeners = (formElement) => {
+const setEventListeners = (formElement, config) => {
   // Находим все поля внутри формы,
   // сделаем из них массив методом Array.from
   const inputList = Array.from(
@@ -85,15 +78,15 @@ const setEventListeners = (formElement) => {
 
 //Добавляем всем формам обработчики
 
-const enableValidation = (paramConfig) => {
+const enableValidation = (config) => {
   // Найдём все формы с указанным классом в DOM,
   // сделаем из них массив методом Array.from
-  const formList = Array.from(document.querySelectorAll(paramConfig.formSelector));
+  const formList = Array.from(document.querySelectorAll(config.formSelector));
 
   // Переберём полученную коллекцию
   formList.forEach((formElement) => {
 
-    setEventListeners(formElement, paramConfig);
+    setEventListeners(formElement, config);
   });
 };
 
