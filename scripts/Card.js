@@ -1,13 +1,12 @@
 
 
-//import {captionImagePopup, popupImage, popupImageWindow, openPopup} from "./index.js"; 
 
 export class Card {
-  constructor(data, templateSelector,) {
+  constructor(data, templateSelector, handlerOpenPopupImage) {
     this._name = data.name;
     this._link = data.link;
     this._templateSelector = templateSelector;
-   
+   this._handlerOpenPopupImage = handlerOpenPopupImage;
   }
   _getTemplate() {
     const elementsCardTemplate = document
@@ -25,7 +24,6 @@ export class Card {
     this._element.querySelector(".elements__foto").src = this._link;
     this._element.querySelector(".elements__caption").textContent = this._name;
     this._element.querySelector(".elements__foto").alt = this._name;
-     
 
     return this._element;
   }
@@ -48,7 +46,7 @@ export class Card {
     this._element
       .querySelector(".elements__foto")
       .addEventListener("click", () => {
-        this._handlerOpenPopupImage();
+        this._handlerOpenPopupImage(this._name, this._link);
       });
   }
 
@@ -58,22 +56,20 @@ export class Card {
     this._element
       .querySelector(".elements__icon")
       .classList.toggle("elements__icon_active");
-  };
+  }
 
   /*Функция удаления карточки*/
 
   _handleDeleteElementsCard() {
     this._element.remove();
-  };
- 
-
+  }
 
   /* Функция открывающая фото на в большом размере */
-  _handlerOpenPopupImage()  {
+  
+  /*_handlerOpenPopupImage() { 
     captionImagePopup.textContent = this._name;
     popupImage.src = this._link;
     popupImage.alt = this._name;
     openPopup(popupImageWindow);
-  
-}
+  };*/
 }

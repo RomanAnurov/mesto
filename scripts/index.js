@@ -1,4 +1,3 @@
-
 import { Card } from "./Card.js";
 
 // константы
@@ -55,25 +54,22 @@ const buttonClosePopupAdd = popupAdd.querySelector(".popup__close");
 
 //Дом элементы
 
-
 const elementsContainer = document.querySelector(".elements");
 const formAddCard = popupAdd.querySelector(".popup__form");
 const nameCardInput = formAddCard.querySelector(".popup__input_type_card-name");
 const urlCardInput = formAddCard.querySelector(".popup__input_type_card-url");
 
- export const captionImagePopup = document.querySelector(".popup__caption");
- export const popupImage = document.querySelector(".popup__image");
+const captionImagePopup = document.querySelector(".popup__caption");
+const popupImage = document.querySelector(".popup__image");
 
 // селект попапа с модальным окном картинки
 
-  export const popupImageWindow = document.querySelector(".popup_type_image-open");
+const popupImageWindow = document.querySelector(".popup_type_image-open");
 const buttonPopupImageClose = popupImageWindow.querySelector(".popup__close");
-
-
 
 //функция открытия попапов
 
- export function openPopup(popup) {
+function openPopup(popup) {
   popup.classList.add("popup_type_opened");
   document.addEventListener("keydown", popupCloseEsc);
 }
@@ -161,8 +157,11 @@ buttonClosePopupAdd.addEventListener("click", () => closePopup(popupAdd));
 
 const handlerSubmitAddElementsForm = (evt) => {
   evt.preventDefault();
-  const addCard = { name: nameCardInput.value, link: urlCardInput.value };
-  const card = new Card(addCard, "#elements-template");
+  const addCard = {
+    name: nameCardInput.value,
+    link: urlCardInput.value,
+  };
+  const card = new Card(addCard, "#elements-template", handlerOpenPopupImage);
   const elementsCardTemplate = card.generateCard();
   elementsContainer.prepend(elementsCardTemplate);
   closePopup(popupAdd);
@@ -186,13 +185,13 @@ const handlerSubmitAddElementsForm = (evt) => {
 
 // открытие фотки в модальном окне
 
-/*function handlerOpenPopupImage(elementsData) {
-  captionImagePopup.textContent = elementsData.name;
-  popupImage.src = elementsData.link;
-  popupImage.alt = elementsData.name;
+function handlerOpenPopupImage(name, link) {
+  popupImage.src = link;
+  captionImagePopup.textContent = name;
+  popupImage.alt = name;
 
   return openPopup(popupImageWindow);
-} */
+}
 
 // генерация карточки
 
@@ -238,7 +237,7 @@ initialCards.forEach((elementsData) => {
 });*/
 
 initialCards.forEach((item) => {
-  const card = new Card(item, "#elements-template");
+  const card = new Card(item, "#elements-template", handlerOpenPopupImage);
   const elementsCardTemplate = card.generateCard();
 
   elementsContainer.append(elementsCardTemplate);
