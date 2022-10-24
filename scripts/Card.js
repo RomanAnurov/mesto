@@ -1,12 +1,9 @@
-
-
-
 export class Card {
   constructor(data, templateSelector, handlerOpenPopupImage) {
     this._name = data.name;
     this._link = data.link;
     this._templateSelector = templateSelector;
-   this._handlerOpenPopupImage = handlerOpenPopupImage;
+    this._handlerOpenPopupImage = handlerOpenPopupImage;
   }
   _getTemplate() {
     const elementsCardTemplate = document
@@ -65,7 +62,7 @@ export class Card {
   }
 
   /* Функция открывающая фото на в большом размере */
-  
+
   /*_handlerOpenPopupImage() { 
     captionImagePopup.textContent = this._name;
     popupImage.src = this._link;
