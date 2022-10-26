@@ -16,11 +16,13 @@ export class Card {
 
   generateCard() {
     this._element = this._getTemplate();
-    this._setEventListeners();
-
-    this._element.querySelector(".elements__foto").src = this._link;
+    this._cardImage = this._element.querySelector(".elements__foto");
+    this._cardImage.src = this._link;
     this._element.querySelector(".elements__caption").textContent = this._name;
-    this._element.querySelector(".elements__foto").alt = this._name;
+    this._cardImage.alt = this._name;
+    this._likeButton = this._element.querySelector(".elements__icon");
+    this._buttonBasket = this._element.querySelector(".elements__icon-basket");
+    this._setEventListeners();
 
     return this._element;
   }
@@ -28,31 +30,23 @@ export class Card {
   /* Слушатели */
 
   _setEventListeners() {
-    this._element
-      .querySelector(".elements__icon")
-      .addEventListener("click", () => {
-        this._handleLikeElementsCard();
-      });
+    this._likeButton.addEventListener("click", () => {
+      this._handleLikeElementsCard();
+    });
 
-    this._element
-      .querySelector(".elements__icon-basket")
-      .addEventListener("click", () => {
-        this._handleDeleteElementsCard();
-      });
+    this._buttonBasket.addEventListener("click", () => {
+      this._handleDeleteElementsCard();
+    });
 
-    this._element
-      .querySelector(".elements__foto")
-      .addEventListener("click", () => {
-        this._handlerOpenPopupImage(this._name, this._link);
-      });
+    this._cardImage.addEventListener("click", () => {
+      this._handlerOpenPopupImage(this._name, this._link);
+    });
   }
 
   /*Функция добавления и удаления лайка*/
 
   _handleLikeElementsCard() {
-    this._element
-      .querySelector(".elements__icon")
-      .classList.toggle("elements__icon_active");
+    this._likeButton.classList.toggle("elements__icon_active");
   }
 
   /*Функция удаления карточки*/

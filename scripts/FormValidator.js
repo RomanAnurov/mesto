@@ -8,7 +8,7 @@ export class FormValidator {
     this._errorClass = config.errorClass; // браузерный текст ошибки
 
     this._elementForm = elementForm; // форма
-    this._formList = Array.from(document.querySelectorAll(this._formSelector));
+    this._formList = Array.from(document.querySelector(this._formSelector));
     this._inputList = Array.from(
       this._elementForm.querySelectorAll(this._inputSelector)
     ); // массив инпутов
@@ -70,6 +70,15 @@ export class FormValidator {
     }
   }
 
+  //Функция блокировки кнопки по умолчанию
+
+  _blockButtonDefoult() {
+    this._buttonElement.classList.add(this._inactiveButtonClass);
+    this._buttonElement.setAttribute("disabled", "disabled");
+
+  }
+
+
   //Функция доюбавляет всем полям формы обработчики
 
   _setEventListeners() {
@@ -85,6 +94,10 @@ export class FormValidator {
         this._toggleButtoneState(this._inputList, this._buttonElement);
       });
     });
+
+    this._elementForm.addEventListener("reset", () =>
+      this._blockButtonDefoult()
+    );
   }
 
   //Добавляем всем формам обработчики
