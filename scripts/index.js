@@ -81,15 +81,16 @@ const validConfig = {
 };
 
 
- 
+
 
 //функция открытия попапов
 
 function openPopup(popup) {
   popup.classList.add("popup_type_opened");
+
   document.addEventListener("keydown", closeByEscape);
-  
-  
+
+
 }
 // Функция закрытия попапов
 
@@ -97,6 +98,7 @@ function closePopup(popup) {
   popup.classList.remove("popup_type_opened");
   document.removeEventListener("keydown", closeByEscape);
 }
+
 
 // Закрытие Попапа нажатием на  Esc
 
@@ -129,11 +131,19 @@ function handlerSubmitForm(evt) {
   // Вставьте новые значения с помощью textContent
   profileTitle.textContent = nameInput.value;
   profileSubtitle.textContent = jobInput.value;
-  
+
   return closePopup(popupEdit);
 }
 
-buttonPopupOpenEdit.addEventListener("click", () => openPopup(popupEdit));
+buttonPopupOpenEdit.addEventListener('click', function () {
+  openPopup(popupEdit)
+  nameInput.value = profileTitle.textContent;
+  jobInput.value = profileSubtitle.textContent;
+
+});
+
+
+
 /*buttonPopupEditClose.addEventListener("click", () => closePopup(popupEdit));*/
 
 // Вызовем функцию проверки валидации

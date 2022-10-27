@@ -1,6 +1,6 @@
 export class FormValidator {
   constructor(config, elementForm) {
-    this._formSelector = config.formSelector; // форма
+    /* this._formSelector = config.formSelector; // форма*/
     this._inputSelector = config.inputSelector; // инпут
     this._submitButtonSelector = config.submitButtonSelector; //кнопка сохранить внутри попапа
     this._inactiveButtonClass = config.inactiveButtonClass; //деактивация кнопки сохранить внутри попапа
@@ -8,15 +8,22 @@ export class FormValidator {
     this._errorClass = config.errorClass; // браузерный текст ошибки
 
     this._elementForm = elementForm; // форма
-    this._formList = Array.from(document.querySelector(this._formSelector));
-    this._inputList = Array.from(
-      this._elementForm.querySelectorAll(this._inputSelector)
-    ); // массив инпутов
+    /*this._formList = Array.from(document.querySelector(this._formSelector));*/
+    this._inputList = Array.from(this._elementForm.querySelectorAll(this._inputSelector)); // массив инпутов
     this._buttonElement = this._elementForm.querySelector(
       this._submitButtonSelector
     ); // кнопка формы
   }
 
+    //Функция блокировки кнопки по умолчанию
+
+    _blockButtonDefoult() {
+      this._buttonElement.classList.add(this._inactiveButtonClass);
+      this._buttonElement.setAttribute("disabled", "disabled");
+  
+    }
+
+  
   // Функция, которая добавляет класс с ошибкой
 
   _showInputError(inputElement) {
@@ -70,13 +77,7 @@ export class FormValidator {
     }
   }
 
-  //Функция блокировки кнопки по умолчанию
 
-  _blockButtonDefoult() {
-    this._buttonElement.classList.add(this._inactiveButtonClass);
-    this._buttonElement.setAttribute("disabled", "disabled");
-
-  }
 
 
   //Функция доюбавляет всем полям формы обработчики
@@ -104,8 +105,8 @@ export class FormValidator {
 
   enableValidation = () => {
     // Переберём полученную коллекцию
-    this._formList.forEach((formElement) => {
-      this._setEventListeners(formElement);
+    this._inputList.forEach((inputElement) => {
+      this._setEventListeners(inputElement);
     });
   };
 }
