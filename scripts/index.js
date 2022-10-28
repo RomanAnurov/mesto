@@ -136,9 +136,10 @@ function handlerSubmitForm(evt) {
 }
 
 buttonPopupOpenEdit.addEventListener('click', function () {
-  openPopup(popupEdit)
+  openPopup(popupEdit);
   nameInput.value = profileTitle.textContent;
   jobInput.value = profileSubtitle.textContent;
+  formValidatorEdit.resetValidation();
 
 });
 
@@ -153,7 +154,13 @@ buttonPopupOpenEdit.addEventListener('click', function () {
 
 formElementEdit.addEventListener("submit", handlerSubmitForm);
 
-buttonOpenPopupAdd.addEventListener("click", () => openPopup(popupAdd));
+buttonOpenPopupAdd.addEventListener("click", function () {
+  openPopup(popupAdd);
+  formAddCard.reset();
+  formValidatorAddCard.resetValidation();
+
+});
+
 /*buttonClosePopupAdd.addEventListener("click", () => closePopup(popupAdd));*/
 
 // Функция добавления новой карточки через форму в DOM

@@ -9,21 +9,24 @@ export class FormValidator {
 
     this._elementForm = elementForm; // форма
     /*this._formList = Array.from(document.querySelector(this._formSelector));*/
+
+    this._errorList = Array.from(this._elementForm.querySelectorAll(this._inputErrorClass));
     this._inputList = Array.from(this._elementForm.querySelectorAll(this._inputSelector)); // массив инпутов
     this._buttonElement = this._elementForm.querySelector(
       this._submitButtonSelector
     ); // кнопка формы
   }
 
-    //Функция блокировки кнопки по умолчанию
+  //Функция блокировки кнопки по умолчанию
 
-    _blockButtonDefoult() {
-      this._buttonElement.classList.add(this._inactiveButtonClass);
-      this._buttonElement.setAttribute("disabled", "disabled");
-  
-    }
+  _blockButtonDefoult() {
+    this._buttonElement.classList.add(this._inactiveButtonClass);
+    this._buttonElement.setAttribute("disabled", "disabled");
 
-  
+  }
+
+
+
   // Функция, которая добавляет класс с ошибкой
 
   _showInputError(inputElement) {
@@ -101,12 +104,19 @@ export class FormValidator {
     );
   }
 
-  //Добавляем всем формам обработчики
+  resetValidation() {
+    this._toggleButtoneState();
+    this._inputList.forEach((inputElement) => {
+      this._hideInputError(inputElement)
+    });
+  }
+
+
+  //Добавляем в обработчик
 
   enableValidation = () => {
-    // Переберём полученную коллекцию
-    this._inputList.forEach((inputElement) => {
-      this._setEventListeners(inputElement);
-    });
+
+    this._setEventListeners();
+
   };
 }
