@@ -1,4 +1,4 @@
-export class FormValidator {
+export default class FormValidator {
   constructor(config, elementForm) {
     /* this._formSelector = config.formSelector; // форма*/
     this._inputSelector = config.inputSelector; // инпут
@@ -10,8 +10,12 @@ export class FormValidator {
     this._elementForm = elementForm; // форма
     /*this._formList = Array.from(document.querySelector(this._formSelector));*/
 
-    this._errorList = Array.from(this._elementForm.querySelectorAll(this._inputErrorClass));
-    this._inputList = Array.from(this._elementForm.querySelectorAll(this._inputSelector)); // массив инпутов
+    this._errorList = Array.from(
+      this._elementForm.querySelectorAll(this._inputErrorClass)
+    );
+    this._inputList = Array.from(
+      this._elementForm.querySelectorAll(this._inputSelector)
+    ); // массив инпутов
     this._buttonElement = this._elementForm.querySelector(
       this._submitButtonSelector
     ); // кнопка формы
@@ -22,10 +26,7 @@ export class FormValidator {
   _blockButtonDefoult() {
     this._buttonElement.classList.add(this._inactiveButtonClass);
     this._buttonElement.setAttribute("disabled", "disabled");
-
   }
-
-
 
   // Функция, которая добавляет класс с ошибкой
 
@@ -80,9 +81,6 @@ export class FormValidator {
     }
   }
 
-
-
-
   //Функция доюбавляет всем полям формы обработчики
 
   _setEventListeners() {
@@ -107,16 +105,13 @@ export class FormValidator {
   resetValidation() {
     this._toggleButtoneState();
     this._inputList.forEach((inputElement) => {
-      this._hideInputError(inputElement)
+      this._hideInputError(inputElement);
     });
   }
-
 
   //Добавляем в обработчик
 
   enableValidation = () => {
-
     this._setEventListeners();
-
   };
 }

@@ -1,10 +1,13 @@
-export class Card {
-  constructor(data, templateSelector, handlerOpenPopupImage) {
+export default class Card {
+  constructor(data, templateSelector, {handleCardClick}) {
     this._name = data.name;
     this._link = data.link;
     this._templateSelector = templateSelector;
-    this._handlerOpenPopupImage = handlerOpenPopupImage;
+    this._handleCardClick = handleCardClick;
   }
+
+  // Возвращает разметку карточки//
+
   _getTemplate() {
     const elementsCardTemplate = document
       .querySelector(this._templateSelector)
@@ -39,7 +42,7 @@ export class Card {
     });
 
     this._cardImage.addEventListener("click", () => {
-      this._handlerOpenPopupImage(this._name, this._link);
+      this._handleCardClick(this._link, this._name);
     });
   }
 
