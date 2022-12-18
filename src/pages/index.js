@@ -25,15 +25,8 @@ import {
   validConfig,
 } from "../utils/constants.js";
 
-function handlerSubmitForm() {
-  profileTitle.textContent = nameInput.value;
-  profileSubtitle.textContent = jobInput.value;
-  popupEditUser.close();
-}
 
-// Функция сохраняет данные пользователя
-
-function saveProfile() {
+function openPopupEditUser() {
   const { name, job } = userInfo.getUserInfo();
   nameInput.value = name;
   jobInput.value = job;
@@ -41,28 +34,12 @@ function saveProfile() {
   formValidatorEdit.resetValidation();
 }
 
-// Функция добавления новой карточки через форму в DOM
 
-const handlerSubmitAddElementsForm = () => {
-  const addCard = {
-    name: nameCardInput.value,
-    link: urlCardInput.value,
-  };
-  const card = createCard(addCard);
-  elementsContainer.prepend(card);
-  popupAddCard.close();
-  formAddCard.reset();
-};
-
-buttonPopupOpenEdit.addEventListener("click", saveProfile);
-
+buttonPopupOpenEdit.addEventListener("click", openPopupEditUser);
 buttonOpenPopupAdd.addEventListener("click", function () {
   popupAddCard.open();
   formValidatorAddCard.resetValidation();
 });
-
-formElementEdit.addEventListener("submit", handlerSubmitForm);
-formAddCard.addEventListener("submit", handlerSubmitAddElementsForm);
 
 // функция создаёт карточку
 
@@ -72,8 +49,8 @@ function createCard(data) {
       popupWindowOpen.open(link, name);
     },
   });
-  const elementsCardTemplate = card.generateCard();
-  return elementsCardTemplate;
+  const newCard = card.generateCard();
+  return newCard;
 }
 
 // класс создаёт набор из 6 карточек и вставляет в DOM
@@ -82,17 +59,10 @@ const cardList = new Section(
   {
     data: initialCards,
     renderer: (data) => {
-      const card = new Card(data, "#elements-template", {
-        handleCardClick: (link, name) => {
-          popupWindowOpen.open(link, name);
-        },
-      });
-      const elementsCardTemplate = card.generateCard();
-
-      cardList.addItem(elementsCardTemplate);
+      cardList.addItem(createCard(data));
     },
   },
-  elementsContainer
+  ".elements"
 );
 
 cardList.renderItems();
@@ -112,7 +82,12 @@ popupWindowOpen.setEventListeners();
 const popupAddCard = new PopupWithForm(
   {
     submitCallBack: () => {
-      popupAddCard.addtem(elementsCardTemplate);
+      const addCard = {
+        name: nameCardInput.value,
+        link: urlCardInput.value,
+      };
+      cardList.addItem(createCard(addCard));
+      popupAddCard.close();
     },
   },
   ".popup_type_add-card"
@@ -130,7 +105,8 @@ const userInfo = new UserInfo({
 const popupEditUser = new PopupWithForm(
   {
     submitCallBack: (data) => {
-      userInfo.setUserInfo(data);
+      userInfo.setUserInfo(data["user-name"], data["user-about"]);
+      popupEditUser.close();
     },
   },
   ".popup_type_edit-profile"

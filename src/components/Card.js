@@ -1,5 +1,5 @@
 export default class Card {
-  constructor(data, templateSelector, {handleCardClick}) {
+  constructor(data, templateSelector, { handleCardClick }) {
     this._name = data.name;
     this._link = data.link;
     this._templateSelector = templateSelector;
@@ -57,13 +57,4 @@ export default class Card {
   _handleDeleteElementsCard() {
     this._element.remove();
   }
-
-  /* Функция открывающая фото на в большом размере */
-
-  /*_handlerOpenPopupImage() { 
-    captionImagePopup.textContent = this._name;
-    popupImage.src = this._link;
-    popupImage.alt = this._name;
-    openPopup(popupImageWindow);
-  };*/
 }

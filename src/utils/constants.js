@@ -29,9 +29,6 @@ export const buttonPopupOpenEdit = document.querySelector(
   ".profile__edit-button"
 );
 const popupEdit = document.querySelector(".popup_type_edit-profile");
-export const popups = document.querySelectorAll(".popup");
-
-// Находим форму редактирования данных пользователяв DOM
 
 export const formElementEdit = popupEdit.querySelector(".popup__form");
 // Находим поля формы в DOM

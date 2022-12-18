@@ -6,10 +6,8 @@ export default class FormValidator {
     this._inactiveButtonClass = config.inactiveButtonClass; //деактивация кнопки сохранить внутри попапа
     this._inputErrorClass = config.inputErrorClass; // инпут с  ошибкой
     this._errorClass = config.errorClass; // браузерный текст ошибки
-
     this._elementForm = elementForm; // форма
-    /*this._formList = Array.from(document.querySelector(this._formSelector));*/
-
+    
     this._errorList = Array.from(
       this._elementForm.querySelectorAll(this._inputErrorClass)
     );
@@ -23,7 +21,7 @@ export default class FormValidator {
 
   //Функция блокировки кнопки по умолчанию
 
-  _blockButtonDefoult() {
+  _blockButtonDefault() {
     this._buttonElement.classList.add(this._inactiveButtonClass);
     this._buttonElement.setAttribute("disabled", "disabled");
   }
@@ -51,7 +49,7 @@ export default class FormValidator {
 
   // Функция, которая проверяет валидность поля
 
-  _isValid(inputElement) {
+  _toggleInputErrorState(inputElement) {
     if (!inputElement.validity.valid) {
       // Если поле не проходит валидацию, покажем ошибку
       this._showInputError(inputElement);
@@ -73,8 +71,7 @@ export default class FormValidator {
 
   _toggleButtoneState() {
     if (this._hasInvalidInput(this._inputList)) {
-      this._buttonElement.classList.add(this._inactiveButtonClass);
-      this._buttonElement.setAttribute("disabled", "disabled");
+      this._blockButtonDefault();
     } else {
       this._buttonElement.classList.remove(this._inactiveButtonClass);
       this._buttonElement.removeAttribute("disabled", "disabled");
@@ -92,13 +89,13 @@ export default class FormValidator {
       inputElement.addEventListener("input", () => {
         // Внутри колбэка вызовем isValid,
         // передав ей форму и проверяемый элемент
-        this._isValid(inputElement);
+        this._toggleInputErrorState(inputElement);
         this._toggleButtoneState(this._inputList, this._buttonElement);
       });
     });
 
     this._elementForm.addEventListener("reset", () =>
-      this._blockButtonDefoult()
+      this._blockButtonDefault()
     );
   }
 
