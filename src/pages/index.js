@@ -25,7 +25,6 @@ import {
   validConfig,
 } from "../utils/constants.js";
 
-
 function openPopupEditUser() {
   const { name, job } = userInfo.getUserInfo();
   nameInput.value = name;
@@ -33,7 +32,6 @@ function openPopupEditUser() {
   popupEditUser.open();
   formValidatorEdit.resetValidation();
 }
-
 
 buttonPopupOpenEdit.addEventListener("click", openPopupEditUser);
 buttonOpenPopupAdd.addEventListener("click", function () {
@@ -81,12 +79,12 @@ popupWindowOpen.setEventListeners();
 
 const popupAddCard = new PopupWithForm(
   {
-    submitCallBack: () => {
-      const addCard = {
-        name: nameCardInput.value,
-        link: urlCardInput.value,
+    submitCallBack: (data) => {
+      const cardData = {
+        name: data["card-name"],
+        link: data["card-url"],
       };
-      cardList.addItem(createCard(addCard));
+      cardList.addItem(createCard(cardData));
       popupAddCard.close();
     },
   },
