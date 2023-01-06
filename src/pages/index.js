@@ -1,5 +1,7 @@
 import "./index.css";
 
+import Api from "../components/Api.js";
+
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 
@@ -24,6 +26,7 @@ import {
   urlCardInput,
   validConfig,
 } from "../utils/constants.js";
+import { data } from "autoprefixer";
 
 function openPopupEditUser() {
   const { name, job } = userInfo.getUserInfo();
@@ -111,3 +114,14 @@ const popupEditUser = new PopupWithForm(
 );
 
 popupEditUser.setEventListeners();
+
+const API_OPTIONS = {baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-56',
+headers: {
+  authorization: '22bd7d89-efbc-47e6-b194-63dcf40cb6de',
+  'Content-Type': 'application/json'}
+}
+const api = new Api(API_OPTIONS);
+
+
+
+
