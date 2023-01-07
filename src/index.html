@@ -24,11 +24,16 @@
         />
         <div class="profile__info">
           <div class="profile__row">
-            <h1 class="profile__title">Жак-Ив Кусто</h1>
-            <button aria-label="Edit" class="profile__edit-button"  type="button"></button>
+            <h1 class="profile__title"></h1>
+            <button
+              aria-label="Edit"
+              class="profile__edit-button"
+              type="button"
+            ></button>
           </div>
-          <p class="profile__sub-title">Исследователь океана</p>
+          <p class="profile__sub-title"><b/p></p>
         </div>
+
         <button class="profile__add-button" type="button"></button>
       </section>
       <!--контейнер-->
@@ -49,10 +54,10 @@
             id="user-name"
             class="popup__input popup__input_type_user-name"
             type="text"
-            name="user-name"
+            name="name"
             minlength="2"
             maxlength="40"
-            value="Жак-Ив Кусто"
+            value=" "
             required
           />
           <span class="user-name-error popup__input-error"></span>
@@ -60,8 +65,8 @@
             id="user-about"
             class="popup__input popup__input_type_user-about"
             type="text"
-            name="user-about"
-            value="Исследователь океана"
+            name="about"
+            value=" "
             minlength="2"
             maxlength="200"
             required
@@ -85,7 +90,7 @@
             id="card-name"
             class="popup__input popup__input_type_card-name"
             type="text"
-            name="card-name"
+            name="name"
             placeholder="Название"
             minlength="2"
             maxlength="30"
@@ -96,7 +101,7 @@
             id="card-url"
             class="popup__input popup__input_type_card-url"
             type="url"
-            name="card-url"
+            name="url"
             placeholder="Ссылка на картинку"
             required
           />

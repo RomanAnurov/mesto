@@ -1,4 +1,4 @@
-export const initialCards = [
+/* export const initialCards = [
   {
     name: "Архыз",
     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
@@ -23,7 +23,7 @@ export const initialCards = [
     name: "Байкал",
     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
   },
-]; 
+]; */
 
 export const buttonPopupOpenEdit = document.querySelector(
   ".profile__edit-button"
@@ -35,7 +35,7 @@ export const formElementEdit = popupEdit.querySelector(".popup__form");
 export const nameInput = formElementEdit.querySelector(
   ".popup__input_type_user-name"
 );
-export const jobInput = formElementEdit.querySelector(
+export const aboutInput = formElementEdit.querySelector(
   ".popup__input_type_user-about"
 );
 

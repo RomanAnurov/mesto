@@ -12,11 +12,10 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 
 import {
-  initialCards,
   buttonPopupOpenEdit,
   formElementEdit,
   nameInput,
-  jobInput,
+  aboutInput,
   profileTitle,
   profileSubtitle,
   buttonOpenPopupAdd,
@@ -26,12 +25,13 @@ import {
   urlCardInput,
   validConfig,
 } from "../utils/constants.js";
+
 import { data } from "autoprefixer";
 
 function openPopupEditUser() {
-  const { name, job } = userInfo.getUserInfo();
+  const { name, about } = userInfo.getUserInfo();
   nameInput.value = name;
-  jobInput.value = job;
+  aboutInput.value = about;
   popupEditUser.open();
   formValidatorEdit.resetValidation();
 }
@@ -56,18 +56,6 @@ function createCard(data) {
 
 // класс создаёт набор из 6 карточек и вставляет в DOM
 
-const cardList = new Section(
-  {
-    data: initialCards,
-    renderer: (data) => {
-      cardList.addItem(createCard(data));
-    },
-  },
-  ".elements"
-);
-
-cardList.renderItems();
-
 const formValidatorEdit = new FormValidator(validConfig, formElementEdit);
 const formValidatorAddCard = new FormValidator(validConfig, formAddCard);
 formValidatorEdit.enableValidation();
@@ -83,11 +71,12 @@ popupWindowOpen.setEventListeners();
 const popupAddCard = new PopupWithForm(
   {
     submitCallBack: (data) => {
-      const cardData = {
-        name: data["card-name"],
-        link: data["card-url"],
-      };
-      cardList.addItem(createCard(cardData));
+      api.postNewCard(data).then((data) => {
+        const cardData = data;
+
+        cardList.addItem(createCard(cardData));
+      });
+
       popupAddCard.close();
     },
   },
@@ -100,13 +89,17 @@ popupAddCard.setEventListeners();
 
 const userInfo = new UserInfo({
   nameSelector: ".profile__title",
-  jobSelector: ".profile__sub-title",
+  aboutSelector: ".profile__sub-title",
 });
+
+//Редактирование данных пользователя
 
 const popupEditUser = new PopupWithForm(
   {
     submitCallBack: (data) => {
-      userInfo.setUserInfo(data["user-name"], data["user-about"]);
+      api.editUserData(data).then((data) => {
+        userInfo.setUserInfo(data.name, data.about);
+      });
       popupEditUser.close();
     },
   },
@@ -115,13 +108,40 @@ const popupEditUser = new PopupWithForm(
 
 popupEditUser.setEventListeners();
 
-const API_OPTIONS = {baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-56',
-headers: {
-  authorization: '22bd7d89-efbc-47e6-b194-63dcf40cb6de',
-  'Content-Type': 'application/json'}
-}
+const API_OPTIONS = {
+  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-56",
+  headers: {
+    authorization: "22bd7d89-efbc-47e6-b194-63dcf40cb6de",
+    "Content-Type": "application/json",
+  },
+};
+
+// Класс  Api
+
 const api = new Api(API_OPTIONS);
 
+const cardList = new Section({ data, renderer }, ".elements");
 
+const renderer = (data) => {
+  cardList.addItem(createCard(data));
+};
 
+//Получение данных пользователя
 
+api.getInfo().then((data) => {
+  userInfo.setUserInfo(data.name, data.about);
+});
+
+//Создание массива карточек с сервера
+
+api.getInitialCards().then((data) => {
+  const cardList = new Section(
+    {
+      data,
+      renderer,
+    },
+    ".elements"
+  );
+
+  cardList.renderItems();
+});
