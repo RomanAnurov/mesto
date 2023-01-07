@@ -51,7 +51,7 @@
         <h2 class="popup__title">Редактировать профиль</h2>
         <form class="popup__form" name="editProfile" novalidate>
           <input
-            id="user-name"
+            id="name"
             class="popup__input popup__input_type_user-name"
             type="text"
             name="name"
@@ -60,9 +60,9 @@
             value=" "
             required
           />
-          <span class="user-name-error popup__input-error"></span>
+          <span class="name-error popup__input-error"></span>
           <input
-            id="user-about"
+            id="about"
             class="popup__input popup__input_type_user-about"
             type="text"
             name="about"
@@ -71,7 +71,7 @@
             maxlength="200"
             required
           />
-          <span class="user-about-error popup__input-error"
+          <span class="about-error popup__input-error"
             >Необходимо заполнить данное поле</span
           >
           <button class="popup__save" type="submit">Сохранить</button>
@@ -87,7 +87,7 @@
         <h2 class="popup__title">Новое место</h2>
         <form class="popup__form" name="addCard" novalidate>
           <input
-            id="card-name"
+            id="name"
             class="popup__input popup__input_type_card-name"
             type="text"
             name="name"
@@ -96,16 +96,16 @@
             maxlength="30"
             required
           />
-          <span class="card-name-error popup__input-error"></span>
+          <span class="name-error popup__input-error"></span>
           <input
-            id="card-url"
+            id="url"
             class="popup__input popup__input_type_card-url"
             type="url"
             name="url"
             placeholder="Ссылка на картинку"
             required
           />
-          <span class="card-url-error popup__input-error"></span>
+          <span class="url-error popup__input-error"></span>
           <button class="popup__save" type="submit">Создать</button>
         </form>
       </div>
