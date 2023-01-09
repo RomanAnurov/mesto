@@ -1,11 +1,20 @@
 export default class Card {
-  constructor(data, templateSelector, { handleCardClick, handlePopupConfirm}) {
+  constructor(
+    data,
+    templateSelector,
+    userID, {
+      handleCardClick,
+      handlePopupConfirm
+    }
+  ) {
     this._name = data.name;
     this._link = data.link;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
     this._handlePopupConfirm = handlePopupConfirm;
-    
+    this._ownerID = data.owner._id;
+    this._id = data._id;
+    this._userID = userID;
   }
 
   // Возвращает разметку карточки//
@@ -27,8 +36,11 @@ export default class Card {
     this._cardImage.alt = this._name;
     this._likeButton = this._element.querySelector(".elements__icon");
     this._buttonBasket = this._element.querySelector(".elements__icon-basket");
+    
+    if (this._ownerID === this._userID) {
+      this._buttonBasket.classList.remove("elements__icon-basket_hidden");
+    };
     this._setEventListeners();
-
     return this._element;
   }
 
@@ -38,10 +50,6 @@ export default class Card {
     this._likeButton.addEventListener("click", () => {
       this._handleLikeElementsCard();
     });
-
-   /* this._buttonBasket.addEventListener("click", () => {
-      this._handleDeleteElementsCard();
-    });*/
 
     this._buttonBasket.addEventListener("click", () => {
       this._handlePopupConfirm();
@@ -58,10 +66,11 @@ export default class Card {
     this._likeButton.classList.toggle("elements__icon_active");
   }
 
+  //Отображениее иконки удаления каточки пользователя
+
   /*Функция удаления карточки*/
 
-  
- removeCard() {
+  removeCard() {
     this._element.remove();
   }
 }

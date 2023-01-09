@@ -37,7 +37,7 @@ export default class Api {
       headers: this._headers,
       body: JSON.stringify({
         name: data.name,
-        about: data.about
+        about: data.about,
       }),
     }).then((res) => {
       if (res.ok) {
@@ -47,23 +47,33 @@ export default class Api {
       return Promise.reject(`Что-то пошло не так: ${res.status}`);
     });
   }
-postNewCard(data) {
-  return fetch(`${this._baseUrl}/cards`, {
-    method: "POST",
-    headers: this._headers,
-    body: JSON.stringify({
-      name: data.name,
-      link: data.url
-    }),
-  }).then((res) => {
-    if (res.ok) {
-      return res.json();
-    }
+  postNewCard(data) {
+    return fetch(`${this._baseUrl}/cards`, {
+      method: "POST",
+      headers: this._headers,
+      body: JSON.stringify({
+        name: data.name,
+        link: data.url,
+      }),
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
 
-    return Promise.reject(`Что-то пошло не так: ${res.status}`);
-  });
+      return Promise.reject(`Что-то пошло не так: ${res.status}`);
+    });
+  }
+  deleteCardApi(_id) {
+    return fetch(`${this._baseUrl}/cards/${_id}`, {
+      method: "DELETE",
+      headers: this._headers
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+
+      return Promise.reject(`Что-то пошло не так: ${res.status}`);
+    });
+  }
   
-
-}
-  // другие методы работы с API
 }

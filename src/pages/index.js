@@ -26,16 +26,10 @@ import {
   validConfig,
 } from "../utils/constants.js";
 
-import {
-  data
-} from "autoprefixer";
-
+import { data } from "autoprefixer";
 
 function openPopupEditUser() {
-  const {
-    name,
-    about
-  } = userInfo.getUserInfo();
+  const { name, about } = userInfo.getUserInfo();
   nameInput.value = name;
   aboutInput.value = about;
   popupEditUser.open();
@@ -50,24 +44,32 @@ buttonOpenPopupAdd.addEventListener("click", function () {
 
 // функция открытия попапа картинки
 
-const handleCardClick = (link, name) => {
-  popupWindowOpen.open(link, name);
-};
+// Йдишник пользователя
 
+let userID;
 
-const createCard = (data)  => {
-  const card = new Card(data, "#elements-template", { handleCardClick, handlePopupConfirm: () => {
-    popupConfirm.open();
-    popupConfirm.setSubmitDeleteCard(() => {
-      card.removeCard();
-      popupConfirm.close();
-    })
-  } });
+// A
+
+function createCard(data)  {
+  const card = new Card(data, "#elements-template", userID, {
+    handleCardClick: (link, name) => {
+      popupWindowOpen.open(link, name);
+    },
+    handlePopupConfirm: () => {
+      popupConfirm.open();
+      popupConfirm.setSubmitDeleteCard(() => {
+        api.deleteCardApi(data._id).then(() => {
+          popupConfirm.close();
+          card.removeCard();
+        });
+      });
+    },
+  });
   const newCard = card.generateCard();
   return newCard;
-}
+};
 
-// класс создаёт набор из 6 карточек и вставляет в DOM
+// класс запрашивает карточки с сервера и вставляет в DOM
 
 const formValidatorEdit = new FormValidator(validConfig, formElementEdit);
 const formValidatorAddCard = new FormValidator(validConfig, formAddCard);
@@ -81,10 +83,10 @@ popupWindowOpen.setEventListeners();
 
 //Экземпляр класса открытия попапа добавления карточки
 
-const popupAddCard = new PopupWithForm({
+const popupAddCard = new PopupWithForm(
+  {
     submitCallBack: (data) => {
       api.postNewCard(data).then((data) => {
-
         cardList.addItem(createCard(data));
       });
 
@@ -105,7 +107,8 @@ const userInfo = new UserInfo({
 
 //Редактирование данных пользователя
 
-const popupEditUser = new PopupWithForm({
+const popupEditUser = new PopupWithForm(
+  {
     submitCallBack: (data) => {
       api.editUserData(data).then((data) => {
         userInfo.setUserInfo(data.name, data.about);
@@ -117,8 +120,6 @@ const popupEditUser = new PopupWithForm({
 );
 
 popupEditUser.setEventListeners();
-
-
 
 const popupConfirm = new PopupConfirm(".popup_type_confirm-delete");
 popupConfirm.setEventListeners();
@@ -135,27 +136,31 @@ const API_OPTIONS = {
 
 const api = new Api(API_OPTIONS);
 
-const cardList = new Section({
+const cardList = new Section(
+  {
     data,
     renderer,
   },
   ".elements"
 );
 
-const renderer = (data) => {
-  cardList.addItem(createCard(data));
-};
-
 //Получение данных пользователя
 
 api.getInfo().then((data) => {
+  userID = data._id;
+
   userInfo.setUserInfo(data.name, data.about);
 });
 
 //Создание массива карточек с сервера
 
+const renderer = (data) => {
+  cardList.addItem(createCard(data));
+};
+
 api.getInitialCards().then((data) => {
-  const cardList = new Section({
+  const cardList = new Section(
+    {
       data,
       renderer,
     },

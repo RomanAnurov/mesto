@@ -24,6 +24,7 @@
 @import url(../blocks/elements/__counter-like/elements__counter-like.css);
 @import url(../blocks/elements/__icon/elements__icon.css);
 @import url(../blocks/elements/__icon-basket/elements__icon-basket.css);
+@import url(../blocks/elements/__icon-basket/_hidden/elements__icon-basket_hidden.css);
 @import url(../blocks/elements/__icon/_active/elements__icon_active.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);

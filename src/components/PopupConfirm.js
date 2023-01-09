@@ -8,9 +8,9 @@ export default class PopupConfirm extends Popup {
     
   }
  
-  setSubmitDeleteCard(submitDeleteCard){
+  setSubmitDeleteCard(data){
     
-    this._submitDeleteCard = submitDeleteCard
+    this._submitDeleteCard = data;
     
   }
 
