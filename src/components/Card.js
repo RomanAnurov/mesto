@@ -1,9 +1,11 @@
 export default class Card {
-  constructor(data, templateSelector, { handleCardClick }) {
+  constructor(data, templateSelector, { handleCardClick, handlePopupConfirm}) {
     this._name = data.name;
     this._link = data.link;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
+    this._handlePopupConfirm = handlePopupConfirm;
+    
   }
 
   // Возвращает разметку карточки//
@@ -37,8 +39,12 @@ export default class Card {
       this._handleLikeElementsCard();
     });
 
-    this._buttonBasket.addEventListener("click", () => {
+   /* this._buttonBasket.addEventListener("click", () => {
       this._handleDeleteElementsCard();
+    });*/
+
+    this._buttonBasket.addEventListener("click", () => {
+      this._handlePopupConfirm();
     });
 
     this._cardImage.addEventListener("click", () => {
@@ -54,7 +60,8 @@ export default class Card {
 
   /*Функция удаления карточки*/
 
-  _handleDeleteElementsCard() {
+  
+ removeCard() {
     this._element.remove();
   }
 }

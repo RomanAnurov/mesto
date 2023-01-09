@@ -1,5 +1,6 @@
 .elements__icon {
   background: url(../../../images/like.svg);
+  margin-bottom: 7px;
   background-repeat: no-repeat;
   background-position: center;
   height: 19px;

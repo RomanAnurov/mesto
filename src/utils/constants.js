@@ -49,6 +49,8 @@ export const buttonOpenPopupAdd = document.querySelector(
 );
 const popupAdd = document.querySelector(".popup_type_add-card");
 
+export const popupConfirmDelete = document.querySelector(".popup_type_confirm-delete");
+
 //Дом элементы
 
 export const elementsContainer = document.querySelector(".elements");
