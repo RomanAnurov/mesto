@@ -20,6 +20,7 @@
 .elements__counter-like{color:#000;font-size:13px;font-weight:400;margin:0;text-align:center}
 .elements__icon{background:url(images/like.87ed371465c7a6a1cd01.svg);background-position:50%;background-repeat:no-repeat;border:none;cursor:pointer;height:19px;margin-bottom:7px;min-width:22px}.elements__icon:hover{opacity:.8;transition:opacity .4s}
 .elements__icon-basket{background:url(images/basket-icon.823b0cf1b0b7e9cb7cad.svg);background-position:50%;background-repeat:no-repeat;border:none;cursor:pointer;height:19px;position:absolute;right:20px;top:20px;width:18px}
+.elements__icon-basket_hidden{display:none}
 .elements__icon_active{background-image:url(images/like-black.fe17a515669479b1e649.svg)}
 .footer{color:#545454;margin:0;padding-bottom:60px;padding-top:67px}@media screen and (max-width:768px){.footer{padding-bottom:36px;padding-top:48px}}
 .footer__copyright{color:#545454;font-size:18px;font-weight:400;line-height:1.2;margin:0}
