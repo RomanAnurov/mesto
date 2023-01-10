@@ -26,10 +26,15 @@ import {
   validConfig,
 } from "../utils/constants.js";
 
-import { data } from "autoprefixer";
+import {
+  data
+} from "autoprefixer";
 
 function openPopupEditUser() {
-  const { name, about } = userInfo.getUserInfo();
+  const {
+    name,
+    about
+  } = userInfo.getUserInfo();
   nameInput.value = name;
   aboutInput.value = about;
   popupEditUser.open();
@@ -50,7 +55,7 @@ let userID;
 
 // A
 
-function createCard(data)  {
+function createCard(data) {
   const card = new Card(data, "#elements-template", userID, {
     handleCardClick: (link, name) => {
       popupWindowOpen.open(link, name);
@@ -64,6 +69,23 @@ function createCard(data)  {
         });
       });
     },
+    handleLikeCounter: (likes) => {
+      if (!likes) {
+        api.getLikeApi(data._id).then((data) => {
+          card.handleLikeCard(data);
+        }).catch(err => {
+          console.log(err);
+        })
+      } else {
+        api.deleteLikeApi(data._id).then((data) => {
+          card.handleLikeCard(data);
+        }).catch(err => {
+          console.log(err);
+        })
+
+      }
+
+    }
   });
   const newCard = card.generateCard();
   return newCard;
@@ -83,8 +105,7 @@ popupWindowOpen.setEventListeners();
 
 //Экземпляр класса открытия попапа добавления карточки
 
-const popupAddCard = new PopupWithForm(
-  {
+const popupAddCard = new PopupWithForm({
     submitCallBack: (data) => {
       api.postNewCard(data).then((data) => {
         cardList.addItem(createCard(data));
@@ -107,8 +128,7 @@ const userInfo = new UserInfo({
 
 //Редактирование данных пользователя
 
-const popupEditUser = new PopupWithForm(
-  {
+const popupEditUser = new PopupWithForm({
     submitCallBack: (data) => {
       api.editUserData(data).then((data) => {
         userInfo.setUserInfo(data.name, data.about);
@@ -136,8 +156,7 @@ const API_OPTIONS = {
 
 const api = new Api(API_OPTIONS);
 
-const cardList = new Section(
-  {
+const cardList = new Section({
     data,
     renderer,
   },
@@ -159,8 +178,7 @@ const renderer = (data) => {
 };
 
 api.getInitialCards().then((data) => {
-  const cardList = new Section(
-    {
+  const cardList = new Section({
       data,
       renderer,
     },

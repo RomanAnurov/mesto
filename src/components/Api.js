@@ -66,7 +66,7 @@ export default class Api {
   deleteCardApi(_id) {
     return fetch(`${this._baseUrl}/cards/${_id}`, {
       method: "DELETE",
-      headers: this._headers
+      headers: this._headers,
     }).then((res) => {
       if (res.ok) {
         return res.json();
@@ -75,5 +75,28 @@ export default class Api {
       return Promise.reject(`Что-то пошло не так: ${res.status}`);
     });
   }
-  
+  getLikeApi(_id) {
+    return fetch(`${this._baseUrl}/cards/${_id}/likes`, {
+      method: "PUT",
+      headers: this._headers,
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+
+      return Promise.reject(`Что-то пошло не так: ${res.status}`);
+    });
+  }
+  deleteLikeApi(_id) {
+    return fetch(`${this._baseUrl}/cards/${_id}/likes`, {
+      method: "DELETE",
+      headers: this._headers,
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+
+      return Promise.reject(`Что-то пошло не так: ${res.status}`);
+    });
+  }
 }

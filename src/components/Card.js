@@ -2,19 +2,20 @@ export default class Card {
   constructor(
     data,
     templateSelector,
-    userID, {
-      handleCardClick,
-      handlePopupConfirm
-    }
+    userID,
+    { handleCardClick, handlePopupConfirm, handleLikeCounter }
   ) {
     this._name = data.name;
     this._link = data.link;
     this._templateSelector = templateSelector;
-    this._handleCardClick = handleCardClick;
-    this._handlePopupConfirm = handlePopupConfirm;
+
     this._ownerID = data.owner._id;
     this._id = data._id;
     this._userID = userID;
+    this._likes = data.likes;
+    this._handleCardClick = handleCardClick;
+    this._handlePopupConfirm = handlePopupConfirm;
+    this._handleLikeCounter = handleLikeCounter;
   }
 
   // Возвращает разметку карточки//
@@ -36,10 +37,16 @@ export default class Card {
     this._cardImage.alt = this._name;
     this._likeButton = this._element.querySelector(".elements__icon");
     this._buttonBasket = this._element.querySelector(".elements__icon-basket");
-    
+    this._counterLikes = this._element.querySelector(".elements__counter-like");
+    this._counterLikes.innerHTML = this._likes.length;
+
+    if (this._likes.some((like) => like._id === this._userID)) {
+      this._likeButton.classList.add("elements__icon_active");
+    }
+
     if (this._ownerID === this._userID) {
       this._buttonBasket.classList.remove("elements__icon-basket_hidden");
-    };
+    }
     this._setEventListeners();
     return this._element;
   }
@@ -48,7 +55,7 @@ export default class Card {
 
   _setEventListeners() {
     this._likeButton.addEventListener("click", () => {
-      this._handleLikeElementsCard();
+      this._handleLikeCounter(this.likeOwner());
     });
 
     this._buttonBasket.addEventListener("click", () => {
@@ -60,13 +67,20 @@ export default class Card {
     });
   }
 
-  /*Функция добавления и удаления лайка*/
-
-  _handleLikeElementsCard() {
-    this._likeButton.classList.toggle("elements__icon_active");
+  handleLikeCard(data) {
+    this._likes = data.likes;
+    this._counterLikes.innerHTML = this._likes.length;
+    this._likeButton.classList.toggle(
+      "elements__icon_active",
+      this.likeOwner()
+    );
   }
 
-  //Отображениее иконки удаления каточки пользователя
+  //  (сравниваем ийдишники массива лайков с айдишником пользователя)
+
+  likeOwner() {
+    return this._likes.some((like) => like._id === this._userID);
+  }
 
   /*Функция удаления карточки*/
 
