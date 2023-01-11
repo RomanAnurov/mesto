@@ -10,3 +10,10 @@
   border: none;
   cursor: pointer;
 }
+
+.elements__icon-basket:hover {
+  opacity: 0.8;
+  transition: 0.3s opacity;
+  
+}
+

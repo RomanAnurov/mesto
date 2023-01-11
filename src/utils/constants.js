@@ -25,8 +25,14 @@
   },
 ]; */
 
-export const buttonPopupOpenEdit = document.querySelector(
+export const buttonOpenPopupEdit = document.querySelector(
   ".profile__edit-button"
+);
+export const buttonOpenPopupAdd = document.querySelector(
+  ".profile__add-button"
+);
+export const buttonOpenPopupAvatar = document.querySelector(
+  ".profile__avatar-edit"
 );
 const popupEdit = document.querySelector(".popup_type_edit-profile");
 
@@ -38,18 +44,18 @@ export const nameInput = formElementEdit.querySelector(
 export const aboutInput = formElementEdit.querySelector(
   ".popup__input_type_user-about"
 );
-
+export const popupAvatar = document.querySelector(".popup_type_edit-avatar");
+export const formAvatar = popupAvatar.querySelector(".popup__form");
 export const profileTitle = document.querySelector(".profile__title");
 export const profileSubtitle = document.querySelector(".profile__sub-title");
 
 // второй ПопАп //
 
-export const buttonOpenPopupAdd = document.querySelector(
-  ".profile__add-button"
-);
 const popupAdd = document.querySelector(".popup_type_add-card");
 
-export const popupConfirmDelete = document.querySelector(".popup_type_confirm-delete");
+export const popupConfirmDelete = document.querySelector(
+  ".popup_type_confirm-delete"
+);
 
 //Дом элементы
 

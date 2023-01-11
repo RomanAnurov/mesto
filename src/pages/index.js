@@ -12,7 +12,10 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import PopupConfirm from "../components/PopupConfirm.js";
 import {
-  buttonPopupOpenEdit,
+  popupAvatar,
+  formAvatar,
+  buttonOpenPopupEdit,
+  buttonOpenPopupAvatar,
   formElementEdit,
   nameInput,
   aboutInput,
@@ -41,19 +44,25 @@ function openPopupEditUser() {
   formValidatorEdit.resetValidation();
 }
 
-buttonPopupOpenEdit.addEventListener("click", openPopupEditUser);
+buttonOpenPopupEdit.addEventListener("click", openPopupEditUser);
 buttonOpenPopupAdd.addEventListener("click", function () {
   popupAddCard.open();
   formValidatorAddCard.resetValidation();
 });
+buttonOpenPopupAvatar.addEventListener("click", function () {
+  popupEditAvatar.open();
+  formValidatorAvatar.resetValidation();
+} );
 
-// функция открытия попапа картинки
+// Создаём класс Аватарки
+
+
 
 // Йдишник пользователя
 
 let userID;
 
-// A
+
 
 function createCard(data) {
   const card = new Card(data, "#elements-template", userID, {
@@ -95,8 +104,10 @@ function createCard(data) {
 
 const formValidatorEdit = new FormValidator(validConfig, formElementEdit);
 const formValidatorAddCard = new FormValidator(validConfig, formAddCard);
+const  formValidatorAvatar = new FormValidator(validConfig, formAvatar);
 formValidatorEdit.enableValidation();
 formValidatorAddCard.enableValidation();
+formValidatorAvatar.enableValidation();
 
 // Экземпляр Класса открытия модального окна с большим фото
 
@@ -124,6 +135,7 @@ popupAddCard.setEventListeners();
 const userInfo = new UserInfo({
   nameSelector: ".profile__title",
   aboutSelector: ".profile__sub-title",
+  avatarSelector: ".profile__avatar"
 });
 
 //Редактирование данных пользователя
@@ -140,6 +152,16 @@ const popupEditUser = new PopupWithForm({
 );
 
 popupEditUser.setEventListeners();
+
+const popupEditAvatar = new PopupWithForm({submitCallBack:(data) => {
+  api.updateAvatar(data).then(()=> {
+    userInfo.setUserAvatar(data.avatar);
+    popupEditAvatar.close();
+  })
+ 
+}}, ".popup_type_edit-avatar");
+
+popupEditAvatar.setEventListeners();
 
 const popupConfirm = new PopupConfirm(".popup_type_confirm-delete");
 popupConfirm.setEventListeners();
@@ -169,6 +191,7 @@ api.getInfo().then((data) => {
   userID = data._id;
 
   userInfo.setUserInfo(data.name, data.about);
+  userInfo.setUserAvatar(data.avatar);
 });
 
 //Создание массива карточек с сервера
@@ -187,3 +210,4 @@ api.getInitialCards().then((data) => {
 
   cardList.renderItems(data.reverse());
 });
+

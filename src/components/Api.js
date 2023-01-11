@@ -76,7 +76,7 @@ export default class Api {
     });
   }
   getLikeApi(_id) {
-    return fetch(`${this._baseUrl}/cards/${_id}/likes`, {
+    return fetch(`${this._baseUrl}/`, {
       method: "PUT",
       headers: this._headers,
     }).then((res) => {
@@ -91,6 +91,21 @@ export default class Api {
     return fetch(`${this._baseUrl}/cards/${_id}/likes`, {
       method: "DELETE",
       headers: this._headers,
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+
+      return Promise.reject(`Что-то пошло не так: ${res.status}`);
+    });
+  }
+  updateAvatar(data) {
+    return fetch(`${this._baseUrl}/users/me/avatar `, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: data.avatar
+      }),
     }).then((res) => {
       if (res.ok) {
         return res.json();
