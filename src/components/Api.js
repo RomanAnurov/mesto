@@ -76,7 +76,7 @@ export default class Api {
     });
   }
   getLikeApi(_id) {
-    return fetch(`${this._baseUrl}/`, {
+    return fetch(`${this._baseUrl}/cards/${_id}/likes`, {
       method: "PUT",
       headers: this._headers,
     }).then((res) => {
@@ -104,7 +104,7 @@ export default class Api {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
-        avatar: data.avatar
+        avatar: data.avatar,
       }),
     }).then((res) => {
       if (res.ok) {

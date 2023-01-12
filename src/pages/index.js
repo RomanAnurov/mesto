@@ -29,15 +29,10 @@ import {
   validConfig,
 } from "../utils/constants.js";
 
-import {
-  data
-} from "autoprefixer";
+import { data } from "autoprefixer";
 
 function openPopupEditUser() {
-  const {
-    name,
-    about
-  } = userInfo.getUserInfo();
+  const { name, about } = userInfo.getUserInfo();
   nameInput.value = name;
   aboutInput.value = about;
   popupEditUser.open();
@@ -52,17 +47,13 @@ buttonOpenPopupAdd.addEventListener("click", function () {
 buttonOpenPopupAvatar.addEventListener("click", function () {
   popupEditAvatar.open();
   formValidatorAvatar.resetValidation();
-} );
+});
 
 // Создаём класс Аватарки
-
-
 
 // Йдишник пользователя
 
 let userID;
-
-
 
 function createCard(data) {
   const card = new Card(data, "#elements-template", userID, {
@@ -71,40 +62,50 @@ function createCard(data) {
     },
     handlePopupConfirm: () => {
       popupConfirm.open();
+
       popupConfirm.setSubmitDeleteCard(() => {
-        api.deleteCardApi(data._id).then(() => {
-          popupConfirm.close();
-          card.removeCard();
-        });
+        api
+          .deleteCardApi(data._id)
+          .then(() => {
+            card.removeCard();
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+          .finally(() => {
+            popupConfirm.close();
+          });
       });
     },
     handleLikeCounter: (likes) => {
       if (!likes) {
-        api.getLikeApi(data._id).then((data) => {
-          card.handleLikeCard(data);
-        }).catch(err => {
-          console.log(err);
-        })
+        api
+          .getLikeApi(data._id)
+          .then((data) => {
+            card.handleLikeCard(data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       } else {
-        api.deleteLikeApi(data._id).then((data) => {
-          card.handleLikeCard(data);
-        }).catch(err => {
-          console.log(err);
-        })
-
+        api
+          .deleteLikeApi(data._id)
+          .then((data) => {
+            card.handleLikeCard(data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       }
-
-    }
+    },
   });
   const newCard = card.generateCard();
   return newCard;
-};
-
-// класс запрашивает карточки с сервера и вставляет в DOM
+}
 
 const formValidatorEdit = new FormValidator(validConfig, formElementEdit);
 const formValidatorAddCard = new FormValidator(validConfig, formAddCard);
-const  formValidatorAvatar = new FormValidator(validConfig, formAvatar);
+const formValidatorAvatar = new FormValidator(validConfig, formAvatar);
 formValidatorEdit.enableValidation();
 formValidatorAddCard.enableValidation();
 formValidatorAvatar.enableValidation();
@@ -116,52 +117,79 @@ popupWindowOpen.setEventListeners();
 
 //Экземпляр класса открытия попапа добавления карточки
 
-const popupAddCard = new PopupWithForm({
-    submitCallBack: (data) => {
-      api.postNewCard(data).then((data) => {
+const popupAddCard = new PopupWithForm(".popup_type_add-card", {
+  submitCallBack: (data) => {
+    popupAddCard.renderLoading(true);
+    api
+      .postNewCard(data)
+      .then((data) => {
         cardList.addItem(createCard(data));
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        popupAddCard.renderLoading(false);
+        popupAddCard.close();
       });
-
-      popupAddCard.close();
-    },
   },
-  ".popup_type_add-card"
-);
+});
 
 popupAddCard.setEventListeners();
 
-// Экземпляр Класса для редактирования данных пользователя
+// Экземпляр Класса с данными пользователя
 
 const userInfo = new UserInfo({
   nameSelector: ".profile__title",
   aboutSelector: ".profile__sub-title",
-  avatarSelector: ".profile__avatar"
+  avatarSelector: ".profile__avatar",
 });
 
 //Редактирование данных пользователя
 
-const popupEditUser = new PopupWithForm({
-    submitCallBack: (data) => {
-      api.editUserData(data).then((data) => {
+const popupEditUser = new PopupWithForm(".popup_type_edit-profile", {
+  submitCallBack: (data) => {
+    popupEditUser.renderLoading(true);
+    api
+      .editUserData(data)
+      .then((data) => {
         userInfo.setUserInfo(data.name, data.about);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        popupEditUser.renderLoading(false);
+        popupEditUser.close();
       });
-      popupEditUser.close();
-    },
   },
-  ".popup_type_edit-profile"
-);
+});
 
 popupEditUser.setEventListeners();
 
-const popupEditAvatar = new PopupWithForm({submitCallBack:(data) => {
-  api.updateAvatar(data).then(()=> {
-    userInfo.setUserAvatar(data.avatar);
-    popupEditAvatar.close();
-  })
- 
-}}, ".popup_type_edit-avatar");
+//Редактирования аватарки пользователя
+
+const popupEditAvatar = new PopupWithForm(".popup_type_edit-avatar", {
+  submitCallBack: (data) => {
+    popupEditAvatar.renderLoading(true);
+    api
+      .updateAvatar(data)
+      .then(() => {
+        userInfo.setUserAvatar(data.avatar);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        popupEditAvatar.renderLoading(false);
+        popupEditAvatar.close();
+      });
+  },
+});
 
 popupEditAvatar.setEventListeners();
+
+// Класс подтверждения
 
 const popupConfirm = new PopupConfirm(".popup_type_confirm-delete");
 popupConfirm.setEventListeners();
@@ -178,7 +206,8 @@ const API_OPTIONS = {
 
 const api = new Api(API_OPTIONS);
 
-const cardList = new Section({
+const cardList = new Section(
+  {
     data,
     renderer,
   },
@@ -187,27 +216,37 @@ const cardList = new Section({
 
 //Получение данных пользователя
 
-api.getInfo().then((data) => {
-  userID = data._id;
+api
+  .getInfo()
+  .then((data) => {
+    userID = data._id;
 
-  userInfo.setUserInfo(data.name, data.about);
-  userInfo.setUserAvatar(data.avatar);
-});
+    userInfo.setUserInfo(data.name, data.about);
+    userInfo.setUserAvatar(data.avatar);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
-//Создание массива карточек с сервера
+//Добавляет карточку в массив
 
 const renderer = (data) => {
   cardList.addItem(createCard(data));
 };
+// Загрузка
+api
+  .getInitialCards()
+  .then((data) => {
+    const cardList = new Section(
+      {
+        data,
+        renderer,
+      },
+      ".elements"
+    );
 
-api.getInitialCards().then((data) => {
-  const cardList = new Section({
-      data,
-      renderer,
-    },
-    ".elements"
-  );
-
-  cardList.renderItems(data.reverse());
-});
-
+    cardList.renderItems(data.reverse());
+  })
+  .catch((err) => {
+    console.log(err);
+  });
