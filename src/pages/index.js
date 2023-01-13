@@ -39,21 +39,23 @@ function openPopupEditUser() {
   formValidatorEdit.resetValidation();
 }
 
-buttonOpenPopupEdit.addEventListener("click", openPopupEditUser);
-buttonOpenPopupAdd.addEventListener("click", function () {
+function openPopupAdd() {
   popupAddCard.open();
   formValidatorAddCard.resetValidation();
-});
-buttonOpenPopupAvatar.addEventListener("click", function () {
+}
+
+function openPopupAvatar() {
   popupEditAvatar.open();
   formValidatorAvatar.resetValidation();
-});
+}
 
-// Создаём класс Аватарки
+buttonOpenPopupEdit.addEventListener("click", openPopupEditUser);
+buttonOpenPopupAdd.addEventListener("click", openPopupAdd);
+buttonOpenPopupAvatar.addEventListener("click", openPopupAvatar);
 
 // Йдишник пользователя
 
-let userID;
+
 
 function createCard(data) {
   const card = new Card(data, "#elements-template", userID, {
@@ -68,12 +70,10 @@ function createCard(data) {
           .deleteCardApi(data._id)
           .then(() => {
             card.removeCard();
+            popupConfirm.close();
           })
           .catch((err) => {
             console.log(err);
-          })
-          .finally(() => {
-            popupConfirm.close();
           });
       });
     },
@@ -106,6 +106,7 @@ function createCard(data) {
 const formValidatorEdit = new FormValidator(validConfig, formElementEdit);
 const formValidatorAddCard = new FormValidator(validConfig, formAddCard);
 const formValidatorAvatar = new FormValidator(validConfig, formAvatar);
+
 formValidatorEdit.enableValidation();
 formValidatorAddCard.enableValidation();
 formValidatorAvatar.enableValidation();
@@ -124,13 +125,11 @@ const popupAddCard = new PopupWithForm(".popup_type_add-card", {
       .postNewCard(data)
       .then((data) => {
         cardList.addItem(createCard(data));
+        popupAddCard.renderLoading(false);
+        popupAddCard.close();
       })
       .catch((err) => {
         console.log(err);
-      })
-      .finally(() => {
-        popupAddCard.renderLoading(false);
-        popupAddCard.close();
       });
   },
 });
@@ -154,13 +153,11 @@ const popupEditUser = new PopupWithForm(".popup_type_edit-profile", {
       .editUserData(data)
       .then((data) => {
         userInfo.setUserInfo(data.name, data.about);
+        popupEditUser.renderLoading(false);
+        popupEditUser.close();
       })
       .catch((err) => {
         console.log(err);
-      })
-      .finally(() => {
-        popupEditUser.renderLoading(false);
-        popupEditUser.close();
       });
   },
 });
@@ -176,13 +173,11 @@ const popupEditAvatar = new PopupWithForm(".popup_type_edit-avatar", {
       .updateAvatar(data)
       .then(() => {
         userInfo.setUserAvatar(data.avatar);
+        popupEditAvatar.renderLoading(false);
+        popupEditAvatar.close();
       })
       .catch((err) => {
         console.log(err);
-      })
-      .finally(() => {
-        popupEditAvatar.renderLoading(false);
-        popupEditAvatar.close();
       });
   },
 });
@@ -193,6 +188,8 @@ popupEditAvatar.setEventListeners();
 
 const popupConfirm = new PopupConfirm(".popup_type_confirm-delete");
 popupConfirm.setEventListeners();
+
+//Api сер
 
 const API_OPTIONS = {
   baseUrl: "https://mesto.nomoreparties.co/v1/cohort-56",
@@ -206,17 +203,9 @@ const API_OPTIONS = {
 
 const api = new Api(API_OPTIONS);
 
-const cardList = new Section(
-  {
-    data,
-    renderer,
-  },
-  ".elements"
-);
-
 //Получение данных пользователя
 
-api
+/*api
   .getInfo()
   .then((data) => {
     userID = data._id;
@@ -226,27 +215,44 @@ api
   })
   .catch((err) => {
     console.log(err);
-  });
+  });  */
 
-//Добавляет карточку в массив
+// Экземпляр класса Section создается для каждого контейнера, в который требуется отрисовывать элементы
 
-const renderer = (data) => {
-  cardList.addItem(createCard(data));
-};
-// Загрузка
-api
+const cardList = new Section(
+  {
+    renderer: (data) => {
+      cardList.addItem(createCard(data));
+    },
+  },
+  ".elements"
+);
+
+//Загрузка карточек с сервера
+
+/* api
   .getInitialCards()
   .then((data) => {
-    const cardList = new Section(
-      {
-        data,
-        renderer,
-      },
-      ".elements"
-    );
+    cardList.renderItems(data.reverse());
+  })
+  .catch((err) => {
+    console.log(err);
+  });*/
+
+  let userID;пше
+
+  // Загрузка карточек и данных пользователя
+  
+Promise.all([api.getInfo(), api.getInitialCards()])
+
+  .then(([{ name, about, avatar, _id }, data]) => {
+    userID = _id;
+    userInfo.setUserInfo(name, about);
+    userInfo.setUserAvatar(avatar);
 
     cardList.renderItems(data.reverse());
   })
+
   .catch((err) => {
     console.log(err);
   });
