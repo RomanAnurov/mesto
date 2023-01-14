@@ -6,16 +6,20 @@ export default class Api {
     this._headers = data.headers;
   }
 
+  _resError(res) {
+    if (res.ok) {
+      return res.json();
+    }
+
+    return Promise.reject(`Что-то пошло не так: ${res.status}`);
+  }
+
   getInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "GET",
       headers: this._headers,
     }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-
-      return Promise.reject(`Что-то пошло не так: ${res.status}`);
+      return this._resError(res);
     });
   }
 
@@ -24,11 +28,7 @@ export default class Api {
       method: "GET",
       headers: this._headers,
     }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-
-      return Promise.reject(`Что-то пошло не так: ${res.status}`);
+      return this._resError(res);
     });
   }
   editUserData(data) {
@@ -40,11 +40,7 @@ export default class Api {
         about: data.about,
       }),
     }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-
-      return Promise.reject(`Что-то пошло не так: ${res.status}`);
+      return this._resError(res);
     });
   }
   postNewCard(data) {
@@ -56,11 +52,7 @@ export default class Api {
         link: data.url,
       }),
     }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-
-      return Promise.reject(`Что-то пошло не так: ${res.status}`);
+      return this._resError(res);
     });
   }
   deleteCardApi(_id) {
@@ -68,11 +60,7 @@ export default class Api {
       method: "DELETE",
       headers: this._headers,
     }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-
-      return Promise.reject(`Что-то пошло не так: ${res.status}`);
+      return this._resError(res);
     });
   }
   getLikeApi(_id) {
@@ -80,11 +68,7 @@ export default class Api {
       method: "PUT",
       headers: this._headers,
     }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-
-      return Promise.reject(`Что-то пошло не так: ${res.status}`);
+      return this._resError(res);
     });
   }
   deleteLikeApi(_id) {
@@ -92,11 +76,7 @@ export default class Api {
       method: "DELETE",
       headers: this._headers,
     }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-
-      return Promise.reject(`Что-то пошло не так: ${res.status}`);
+      return this._resError(res);
     });
   }
   updateAvatar(data) {
@@ -107,11 +87,7 @@ export default class Api {
         avatar: data.avatar,
       }),
     }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-
-      return Promise.reject(`Что-то пошло не так: ${res.status}`);
+      return this._resError(res);
     });
   }
 }

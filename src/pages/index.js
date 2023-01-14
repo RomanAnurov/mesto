@@ -125,11 +125,13 @@ const popupAddCard = new PopupWithForm(".popup_type_add-card", {
       .postNewCard(data)
       .then((data) => {
         cardList.addItem(createCard(data));
-        popupAddCard.renderLoading(false);
         popupAddCard.close();
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        popupAddCard.renderLoading(false);
       });
   },
 });
@@ -153,11 +155,13 @@ const popupEditUser = new PopupWithForm(".popup_type_edit-profile", {
       .editUserData(data)
       .then((data) => {
         userInfo.setUserInfo(data.name, data.about);
-        popupEditUser.renderLoading(false);
         popupEditUser.close();
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        popupEditUser.renderLoading(false);
       });
   },
 });
@@ -173,11 +177,13 @@ const popupEditAvatar = new PopupWithForm(".popup_type_edit-avatar", {
       .updateAvatar(data)
       .then(() => {
         userInfo.setUserAvatar(data.avatar);
-        popupEditAvatar.renderLoading(false);
         popupEditAvatar.close();
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        popupEditAvatar.renderLoading(false);
       });
   },
 });
@@ -239,7 +245,7 @@ const cardList = new Section(
     console.log(err);
   });*/
 
-  let userID;пше
+  let userID;
 
   // Загрузка карточек и данных пользователя
   
@@ -256,3 +262,4 @@ Promise.all([api.getInfo(), api.getInitialCards()])
   .catch((err) => {
     console.log(err);
   });
+  
