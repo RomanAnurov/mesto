@@ -6,7 +6,7 @@ export default class Api {
     this._headers = data.headers;
   }
 
-  _resError(res) {
+  _getResponseData(res) {
     if (res.ok) {
       return res.json();
     }
@@ -19,7 +19,7 @@ export default class Api {
       method: "GET",
       headers: this._headers,
     }).then((res) => {
-      return this._resError(res);
+      return this._getResponseData(res);
     });
   }
 
@@ -28,7 +28,7 @@ export default class Api {
       method: "GET",
       headers: this._headers,
     }).then((res) => {
-      return this._resError(res);
+      return this._getResponseData(res);
     });
   }
   editUserData(data) {
@@ -40,7 +40,7 @@ export default class Api {
         about: data.about,
       }),
     }).then((res) => {
-      return this._resError(res);
+      return this._getResponseData(res);
     });
   }
   postNewCard(data) {
@@ -52,7 +52,7 @@ export default class Api {
         link: data.url,
       }),
     }).then((res) => {
-      return this._resError(res);
+      return this._getResponseData(res);
     });
   }
   deleteCardApi(_id) {
@@ -60,7 +60,7 @@ export default class Api {
       method: "DELETE",
       headers: this._headers,
     }).then((res) => {
-      return this._resError(res);
+      return this._getResponseData(res);
     });
   }
   getLikeApi(_id) {
@@ -68,7 +68,7 @@ export default class Api {
       method: "PUT",
       headers: this._headers,
     }).then((res) => {
-      return this._resError(res);
+      return this._getResponseData(res);
     });
   }
   deleteLikeApi(_id) {
@@ -76,7 +76,7 @@ export default class Api {
       method: "DELETE",
       headers: this._headers,
     }).then((res) => {
-      return this._resError(res);
+      return this._getResponseData(res);
     });
   }
   updateAvatar(data) {
@@ -87,7 +87,7 @@ export default class Api {
         avatar: data.avatar,
       }),
     }).then((res) => {
-      return this._resError(res);
+      return this._getResponseData(res);
     });
   }
 }
